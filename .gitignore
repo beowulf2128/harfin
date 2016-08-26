@@ -20,4 +20,4 @@
 *.swp
 
 # Rails files
-*fixture/*
+*fixtures/*
