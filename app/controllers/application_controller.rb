@@ -4,10 +4,19 @@ class ApplicationController < ActionController::Base
   before_filter :before_filters
 
   def before_filters
-    if !session[:logged_in]
-      redirect_to '/sessions/login'
-      return false
-    end
+    # nothing yet
   end
+
+  # Use this method as a before filter to put pages behind a login
+  def authorize
+    redirect_to login_url, alert: "Not authorized" if current_user.nil?
+  end
+
+  private
+
+  def current_user
+    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  end
+  helper_method :current_user
 
 end
