@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Sessionyears</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <th>Theme</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+    <% @sessionyears.each do |sessionyear| %>
+      <tr>
+        <td><%= sessionyear.theme %></td>
+        <td><%= sessionyear.start_date %></td>
+        <td><%= sessionyear.end_date %></td>
+        <td><%= link_to 'Show', sessionyear %></td>
+        <td><%= link_to 'Edit', edit_sessionyear_path(sessionyear) %></td>
+        <td><%= link_to 'Destroy', sessionyear, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Sessionyear', new_sessionyear_path %>
