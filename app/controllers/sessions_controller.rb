@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       redirect_to root_url, notice: "Logged in!"
     else
-      flash.now.alert = "Email or password is invalid."
+      flash.now.alert = "Login Failure: Email or password is invalid... dan@dan.com /  dan"
     end
   end
 
