@@ -4,5 +4,6 @@ class User < ApplicationRecord
   validates_uniqueness_of :email
 
   has_one :person
+  has_many :registrations
 
 end

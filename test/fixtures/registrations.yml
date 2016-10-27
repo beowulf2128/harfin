@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  registered: false
+  type: 
+  group_assignment: MyString
+  table_assignment: MyString
+  person: one
+  sessionyear: one
+
+two:
+  registered: false
+  type: 
+  group_assignment: MyString
+  table_assignment: MyString
+  person: two
+  sessionyear: two

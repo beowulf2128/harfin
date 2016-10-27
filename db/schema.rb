@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160925033118) do
+ActiveRecord::Schema.define(version: 20161027171924) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,19 @@ ActiveRecord::Schema.define(version: 20160925033118) do
     t.boolean  "gender"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "registrations", force: :cascade do |t|
+    t.boolean  "registered"
+    t.string   "type"
+    t.string   "group_assignment"
+    t.string   "table_assignment"
+    t.integer  "person_id"
+    t.integer  "sessionyear_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["person_id"], name: "index_registrations_on_person_id", using: :btree
+    t.index ["sessionyear_id"], name: "index_registrations_on_sessionyear_id", using: :btree
   end
 
   create_table "sessionyears", force: :cascade do |t|
@@ -44,5 +57,7 @@ ActiveRecord::Schema.define(version: 20160925033118) do
     t.index ["user_id"], name: "index_users_on_user_id", using: :btree
   end
 
+  add_foreign_key "registrations", "persons"
+  add_foreign_key "registrations", "sessionyears"
   add_foreign_key "users", "users"
 end
