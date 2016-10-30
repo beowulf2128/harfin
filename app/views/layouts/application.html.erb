@@ -5,6 +5,9 @@
     <%= csrf_meta_tags %>
 
 
+    <!-- mobile first design - touch zoomingi & page width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <!--  Bootstrap from CDN -->
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -23,28 +26,38 @@
 
   <body>
 
-    <div id="user_header">
-      <% if current_user %>
-        Logged in as <%= current_user.email %>.
-        <%= link_to "Log Out", logout_path %>
-      <% else %>
-        <%= link_to "Sign Up", signup_path %> or
-        <%= link_to "Log In", login_path %>
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">TBC K4T App</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li><%= link_to "Persons", :persons %></li>
+          <li><%= link_to "Session Years", :sessionyears %></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <% if current_user %>
+            <li><a href="#"><%= current_user.email %></a></li>
+            <li><%= link_to "Log Out", logout_path %></li>
+          <% else %>
+            <li><%= link_to "Sign Up", signup_path %></li>
+            <li><%= link_to "Log In", login_path %></li>
+          <% end %>
+        </ul>
+
+      </div>
+    </nav>
+    <div class="container-fluid">
+
+
+      </div>
+      <% if flash[:notice].present? %>
+        <div class="flash notice"><%= flash[:notice] %></div>
       <% end %>
+      <% if flash[:alert].present? %>
+        <div class="flash alert"><%= flash[:alert] %></div>
+      <% end %>
+      <%= yield %>
     </div>
-
-    <div id="menu">
-      <%= link_to "Persons", :persons %> |
-      <%= link_to "Session Years", :sessionyears %> |
-
-    </div>
-    <% if flash[:notice].present? %>
-      <div class="flash notice"><%= flash[:notice] %></div>
-    <% end %>
-    <% if flash[:alert].present? %>
-      <div class="flash alert"><%= flash[:alert] %></div>
-    <% end %>
-    <%= yield %>
-
   </body>
 </html>
