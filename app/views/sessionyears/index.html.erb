@@ -21,8 +21,8 @@
     <% @sessionyears.each do |sessionyear| %>
       <tr>
         <td><%= sessionyear.theme %></td>
-        <td><%= sessionyear.start_date %></td>
-        <td><%= sessionyear.end_date %></td>
+        <td><%= sessionyear.start_date.to_formatted_s :mdy %></td>
+        <td><%= sessionyear.end_date.to_formatted_s :mdy %></td>
         <td><%= link_to 'Show', sessionyear %></td>
         <td><%= link_to 'Edit', edit_sessionyear_path(sessionyear) %></td>
         <td><%= link_to 'Destroy', sessionyear, method: :delete, data: { confirm: 'Are you sure?' } %></td>
