@@ -27,6 +27,7 @@ class RegistrationsController < ApplicationController
   # POST /registrations
   # POST /registrations.json
   def create
+
     @registration = Registration.new(registration_params)
 
     respond_to do |format|
@@ -72,6 +73,6 @@ class RegistrationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def registration_params
-      params.fetch(:registration, {})
+      params.fetch(:registration, {}).permit(:person_id, :type, :group_assignment, :table_assignment, :sessionyear_id)
     end
 end
