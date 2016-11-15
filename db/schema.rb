@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161115033614) do
+ActiveRecord::Schema.define(version: 20161115044140) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20161115033614) do
     t.datetime "sd_date"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.boolean  "is_club_night"
     t.index ["sessionyear_id"], name: "index_sessiondays_on_sessionyear_id", using: :btree
   end
 

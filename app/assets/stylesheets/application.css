@@ -29,3 +29,13 @@
   color: blue;
   background-color: lightcyan;
 }
+
+/* For club night rows */
+.stronger {
+  font-weight: bold;
+  color: #333;
+}
+.weaker {
+  color: #999;
+}
+

@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+<h1><%= @sessionyear.year %> Calendar</h1>
+Theme: <%= @sessionyear.theme %>
+
+<table class="table table-hover table-condensed">
+  <tr>
+     <th>Date</th>
+     <th>Lesson</th>
+     <th>Events</th>
+  </tr>
+  <% @sessionyear.make_new_stub_cal %>
+  <% @sessionyear.sessiondays.each do |sd| %>
+    <tr class="<%= sd.is_club_night? ? 'stronger' : 'weaker' %> <%= sd.is_current? ? 'info' : '' %>">
+      <td><%= sd.sd_date.to_formatted_s :mdy %></td>
+      <td><%= sd.sd_date %>Lesson</td>
+      <td><%= sd.sd_date %>Event</td>
+    </tr>
+<% end %>
+</table>
+
+<%= link_to 'Back', sessionyears_path %>

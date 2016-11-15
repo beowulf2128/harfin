@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   # Sessions / login
   resources :sessions
+  get 'calendar/:id', to: 'sessionyears#calendar'
 
   root :to => 'persons#index'
 end
