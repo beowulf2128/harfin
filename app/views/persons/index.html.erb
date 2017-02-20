@@ -12,11 +12,11 @@
   <tbody>
     <% @persons.each do |person| %>
       <tr>
-        <td><%= person.name_lf %></td>
-        <td><%= link_to 'Show', person %></td>
+        <td><%= link_to person.name_lf, person %></td>
         <td><%= link_to 'Edit', edit_person_path(person) %></td>
-        <td><%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td><%= link_to 'Register Clubber!', "/registrations/new?person_id=#{person.id}&type=clubber" %></td>
+        <!--<td><%#= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+        <td><%= button_to 'Register Clubber!', "/registrations/new?person_id=#{person.id}&type=clubber" %></td>
+        <td><%= button_to 'Register Leader!', "/registrations/new?person_id=#{person.id}&type=leader" %></td>
       </tr>
     <% end %>
   </tbody>

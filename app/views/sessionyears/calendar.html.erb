@@ -8,12 +8,22 @@ Theme: <%= @sessionyear.theme %>
      <th>Lesson</th>
      <th>Events</th>
   </tr>
-  <% @sessionyear.make_new_stub_cal %>
+  <% #@sessionyear.make_new_stub_cal
+     CalBuilder.build_draft(@sessionyear)
+     mgr = K4tLessonMgr.new
+  %>
   <% @sessionyear.sessiondays.each do |sd| %>
     <tr class="<%= sd.is_club_night? ? 'stronger' : 'weaker' %> <%= sd.is_current? ? 'info' : '' %>">
       <td><%= sd.sd_date.to_formatted_s :mdy %></td>
-      <td><%= sd.sd_date %>Lesson</td>
-      <td><%= sd.sd_date %>Event</td>
+      <td>
+        <% if sd.is_club_night? %>
+          <%  lesson =  mgr.next_b %>
+          <%= lesson[:name] %>
+        <% else %>
+          No K4T
+        <% end %>
+      </td>
+      <td><%= '' %>Event</td>
     </tr>
 <% end %>
 </table>
