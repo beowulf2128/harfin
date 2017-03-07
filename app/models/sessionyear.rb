@@ -24,4 +24,8 @@ class Sessionyear < ApplicationRecord
     "#{start_date.to_formatted_s(:year)}-#{end_date.to_formatted_s(:year)}"
   end
 
+  def has_cal?
+    return sessiondays.count > 0
+  end
+
 end
