@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 
   # Use this method as a before filter to put pages behind a login
   def authorize
-    redirect_to login_url, alert: "Not authorized" if current_user.nil?
+    redirect_to login_url, alert: "Please login" if current_user.nil?
   end
 
   private

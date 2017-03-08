@@ -4,12 +4,13 @@ class SessionyearsController < ApplicationController
   before_filter :authorize
 
   def calendar
-  end
 
-  # Generate stub calendar. Should only be called 1x per SY
-  def generate_calendar
+    # Generate stub calendar. Should only be called 1x per SY
+    if @sessionyear.sessiondays.count == 0
+      CalBuilder.build_draft(@sessionyear)
+      @sessionyear.sessiondays.each {|sd| sd.save! }
+    end
 
-    raise "Generating cal for #{@sessionyear.year}"
   end
 
   # GET /sessionyears

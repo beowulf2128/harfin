@@ -27,8 +27,7 @@
         <% if sessionyear.has_cal? %>
           <a href="/calendar/<%= sessionyear.id %>">calendar</a>
         <% else %>
-          <%= button_to 'Generate',("/sessionyears/#{sessionyear.id}/generate_calendar"), :method=>:post %>
-          post to create stub
+          <%= button_to 'Generate',("/calendar/#{sessionyear.id}"), :method=>:post %>
         <% end %>
         </td>
         <td><%= sessionyear.theme %></td>

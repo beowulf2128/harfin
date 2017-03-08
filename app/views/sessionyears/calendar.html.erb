@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 <h1><%= @sessionyear.year %> Calendar</h1>
 Theme: <%= @sessionyear.theme %>
 
@@ -9,7 +8,7 @@ Theme: <%= @sessionyear.theme %>
      <th>Events</th>
   </tr>
   <% #@sessionyear.make_new_stub_cal
-     CalBuilder.build_draft(@sessionyear)
+     #CalBuilder.build_draft(@sessionyear)
      mgr = K4tLessonMgr.new
   %>
   <% @sessionyear.sessiondays.each do |sd| %>
@@ -23,7 +22,19 @@ Theme: <%= @sessionyear.theme %>
           No K4T
         <% end %>
       </td>
-      <td><%= '' %>Event</td>
+      <td><%= '' %>Event
+        <div class="btn-group">
+          <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Add event <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action 1</a></li>
+            <li><a href="#">Action 2</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Other thing</a></li>
+          </ul>
+        </div>
+      </td>
     </tr>
 <% end %>
 </table>
