@@ -21,3 +21,5 @@
 
 # Rails files
 *fixtures/*
+/public/packs
+/node_modules
