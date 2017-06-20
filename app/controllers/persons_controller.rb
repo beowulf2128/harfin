@@ -1,6 +1,6 @@
 class PersonsController < ApplicationController
 
-  before_filter :authorize
+  before_action :authorize
 
   before_action :set_person, only: [:show, :edit, :update, :destroy]
 
