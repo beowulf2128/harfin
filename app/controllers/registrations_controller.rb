@@ -5,7 +5,10 @@ class RegistrationsController < ApplicationController
   # GET /registrations
   # GET /registrations.json
   def index
-    @registrations = Registration.all
+    sy_id = params[:sessionyear_id]
+    @selected_session_year = sy_id.present? ? Sessionyear.find(sy_id) : Sessionyear.current_or_next
+    @all_session_years = Sessionyear.all.sorted - [@selected_session_year]
+    @registrations = @selected_session_year.registrations
   end
 
   # GET /registrations/1

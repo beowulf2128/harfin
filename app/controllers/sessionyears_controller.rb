@@ -16,7 +16,7 @@ class SessionyearsController < ApplicationController
   # GET /sessionyears
   # GET /sessionyears.json
   def index
-    @sessionyears = Sessionyear.all
+    @sessionyears = Sessionyear.sorted
   end
 
   # GET /sessionyears/1

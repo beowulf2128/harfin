@@ -17,6 +17,7 @@ joe = Person.create!(first_name: 'Joseph', middle_name: '', last_name: 'Underwoo
 danu = User.create!(email: 'dan@dan.com', password: 'dan', person_id: dan.id)
 megu = User.create!(email: 'meg@meg.com', password: 'meg', person_id: meg.id)
 
+sy17 = Sessionyear.create!(start_date: Date.parse('August 01, 2017'), end_date: Date.parse('June 01, 2018'), theme: "Focus on individuals" )
 sy16 = Sessionyear.create!(start_date: Date.parse('August 01, 2016'), end_date: Date.parse('June 01, 2017'), theme: "Don't waste your life" )
 sy15 = Sessionyear.create!(start_date: Date.parse('August 01, 2015'), end_date: Date.parse('June 01, 2016'), theme: "15-16 theme" )
 

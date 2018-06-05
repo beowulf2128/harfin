@@ -2,7 +2,9 @@ Rails.application.routes.draw do
 
   resources :persons
   resources :users
-  resources :sessionyears
+  resources :sessionyears do
+    resources :registrations
+  end
   resources :registrations
 
   get 'signup', to: 'users#new', as: 'signup'

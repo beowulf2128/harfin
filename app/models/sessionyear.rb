@@ -1,6 +1,7 @@
 class Sessionyear < ApplicationRecord
 
   has_many :sessiondays
+  has_many :registrations
 
   scope :sorted, -> { order('start_date desc') }
 
@@ -10,6 +11,9 @@ class Sessionyear < ApplicationRecord
   #
   def self.current
     where(['start_date < ? and end_date > ?', Time.now, Time.now]).first
+  end
+  def self.current_or_next
+    where(['end_date > ?', Time.now]).order('end_date ASC').first
   end
 
   def self.vals_for_select
