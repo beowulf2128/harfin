@@ -1,5 +1,5 @@
 class RegistrationsController < ApplicationController
-  before_filter :authorize
+  before_action :authorize
   before_action :set_registration, only: [:show, :edit, :update, :destroy]
 
   # GET /registrations

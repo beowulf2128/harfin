@@ -1,7 +1,7 @@
 class SessionyearsController < ApplicationController
   before_action :set_sessionyear, only: [:show, :edit, :update, :destroy,
                                           :calendar, :generate_calendar]
-  before_filter :authorize
+  before_action  :authorize
 
   def calendar
 
