@@ -1,0 +1,2 @@
+class Scoretype < ApplicationRecord
+end
