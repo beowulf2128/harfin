@@ -24,4 +24,12 @@ sy15 = Sessionyear.create!(start_date: Date.parse('August 01, 2015'), end_date: 
 layreg = Registration.create!(registered: true, reg_type: 'Clubber', group_assignment: '3-5s', person: lay, sessionyear: sy16 )
 joereg = Registration.create!(registered: true, reg_type: 'Clubber', group_assignment: '1st-6th', person: joe, sessionyear: sy16 )
 
+Scoretype.create!(name: 'Book', suggested_point_value: 5,active: true)
+Scoretype.create!(name: 'Bible', suggested_point_value: 5,active: true)
+Scoretype.create!(name: 'Standard', suggested_point_value: 5,active: false)
+Scoretype.create!(name: 'Section', suggested_point_value: 15,active: true)
+Scoretype.create!(name: 'ReviewTraining', suggested_point_value: 30,active: true)
+Scoretype.create!(name: 'ReviewFinal', suggested_point_value: 30,active: true)
+Scoretype.create!(name: 'Friend', suggested_point_value: 30,active: true)
+Scoretype.create!(name: 'ThemeParticipation', suggested_point_value: 30,active: true)
 
