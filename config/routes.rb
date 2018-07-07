@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :scorecards
   resources :persons
   resources :users
   resources :sessionyears do
