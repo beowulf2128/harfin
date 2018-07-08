@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'utils/erd', to: 'utils#erd'
+
   resources :scorecards
   resources :persons
   resources :users
