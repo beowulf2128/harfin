@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-[Registration, Sessionyear, User, Person].each {|c| c.delete_all }
+[Sessionday, Registration, Sessionyear, User, Person].each {|c| c.delete_all }
 
 dan = Person.create!(first_name: 'Dan', middle_name: 'E', last_name: 'And', birthdate: Date.parse('August 01, 1984'), gender: 'm')
 meg = Person.create!(first_name: 'Meg', middle_name: 'A', last_name: 'And', birthdate: Date.parse('February 01, 1985'), gender: 'f')
@@ -17,6 +17,7 @@ joe = Person.create!(first_name: 'Joseph', middle_name: '', last_name: 'Underwoo
 danu = User.create!(email: 'dan@dan.com', password: 'dan', person_id: dan.id)
 megu = User.create!(email: 'meg@meg.com', password: 'meg', person_id: meg.id)
 
+sy18 = Sessionyear.create!(start_date: Date.parse('August 01, 2018'), end_date: Date.parse('June 01, 2019'), theme: "Focus on individuals" )
 sy17 = Sessionyear.create!(start_date: Date.parse('August 01, 2017'), end_date: Date.parse('June 01, 2018'), theme: "Focus on individuals" )
 sy16 = Sessionyear.create!(start_date: Date.parse('August 01, 2016'), end_date: Date.parse('June 01, 2017'), theme: "Don't waste your life" )
 sy15 = Sessionyear.create!(start_date: Date.parse('August 01, 2015'), end_date: Date.parse('June 01, 2016'), theme: "15-16 theme" )
