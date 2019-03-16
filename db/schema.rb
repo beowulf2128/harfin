@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190315022416) do
+ActiveRecord::Schema.define(version: 20190316162636) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 20190315022416) do
     t.integer "recorded_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "truthbooksection_id"
     t.index ["attendance_id"], name: "index_scores_on_attendance_id"
     t.index ["scoretype_id"], name: "index_scores_on_scoretype_id"
   end
@@ -97,6 +98,16 @@ ActiveRecord::Schema.define(version: 20190315022416) do
     t.string "section"
     t.decimal "sort"
     t.decimal "truthbook_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "truthbooksignatures", force: :cascade do |t|
+    t.integer "truthbooksection_id"
+    t.datetime "signed_date"
+    t.integer "sessionday_id"
+    t.integer "signed_by_user_id"
+    t.integer "clubber_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
