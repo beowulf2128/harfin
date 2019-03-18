@@ -3,7 +3,7 @@ class Score < ApplicationRecord
   belongs_to :attendance
   belongs_to :clubber, :class_name=>:Person, :foreign_key=>:clubber_id
   belongs_to :recorded_by, :class_name=>:Person, :foreign_key=>:recorded_by_id
-  #belongs_to :truthbooksignature # TODO make this optional relationship
+  belongs_to :truthbooksignature, optional: true
 
   def self.create_book_bible_score_for(clubber_person, recorded_by_person, attendance=nil, score_date=nil)
     transaction do
@@ -20,8 +20,10 @@ class Score < ApplicationRecord
   end
 
   # section_type - one of Section, Training, Final
-  def self.create_truthbooksignature_score_for(clubber_person, rec_by_person, section_type,
+  def self.create_truthbooksignature_score_for(clubber_person, rec_by_person, tb_signa,
                                                 attendance=nil, score_date=nil)
+
+    section_type = tb_signa.truthbooksection.section_type
     if section_type !~ /Section|Training|Final/
       raise "section_type must be one of [Section, Training, Final]. Got: #{section_type}"
     end
@@ -31,7 +33,8 @@ class Score < ApplicationRecord
       point_value: st.suggested_point_value,
       scoretype: st,
       recorded_by: rec_by_person,
-      attendance: attendance
+      attendance: attendance,
+      truthbooksignature: tb_signa
     })
 
   end

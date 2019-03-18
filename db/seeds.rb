@@ -108,13 +108,13 @@ sy18.sessiondays.sorted.club_nights.limit(10).each do |sd|
   signas_cnt = rand(4) # 0 to 4 signas each night
   loop_secs = tb_secs.shift(signas_cnt)
   loop_secs.each do |tb_sec| # grab the 1st X secs, loop
-    Truthbooksignature.create!({
+    tbsigna = Truthbooksignature.create!({
       clubber_id: lay.id,
       signed_by_user_id: danu.id,
       signed_date: sd.sd_date,
       truthbooksection_id: tb_sec.id
     })
-    Score.create_truthbooksignature_score_for(lay, dan, tb_sec.section_type, att)
+    Score.create_truthbooksignature_score_for(lay, dan, tbsigna, att)
 
   end # tb_secs
 end

@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 20190316162636) do
     t.integer "recorded_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "truthbooksection_id"
+    t.integer "truthbooksignature_id"
     t.index ["attendance_id"], name: "index_scores_on_attendance_id"
     t.index ["scoretype_id"], name: "index_scores_on_scoretype_id"
   end
@@ -96,8 +96,8 @@ ActiveRecord::Schema.define(version: 20190316162636) do
   create_table "truthbooksections", force: :cascade do |t|
     t.string "unit"
     t.string "section"
-    t.decimal "sort"
-    t.decimal "truthbook_id"
+    t.integer "sort"
+    t.integer "truthbook_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
