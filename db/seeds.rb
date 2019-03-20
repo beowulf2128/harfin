@@ -22,6 +22,7 @@ Scoretype.create!(name: 'Training',         suggested_point_value: 30,active: tr
 Scoretype.create!(name: 'Final',            suggested_point_value: 30,active: true)
 Scoretype.create!(name: 'Friend',           suggested_point_value: 30,active: true)
 Scoretype.create!(name: 'ThemeParticipation', suggested_point_value: 30,active: true)
+Scoretype.create!(name: 'Team',             suggested_point_value: 15,active: true)
 
 puts "  - 12 truthbooks"
 Truthbook.create!([
@@ -87,11 +88,11 @@ megu = User.create!(email: 'meg@meg.com', password: 'meg', person_id: meg.id)
 
 
 puts "  - fake registrations for 2018-19"
-reyreg = Registration.create!(registered: true, reg_type: 'Clubber', group_assignment: '3-5s',    person: rey, sessionyear: sy18 )
-layreg = Registration.create!(registered: true, reg_type: 'Clubber', group_assignment: '1st-6th', person: lay, sessionyear: sy18 )
-joereg = Registration.create!(registered: true, reg_type: 'Clubber', group_assignment: '1st-6th', person: joe, sessionyear: sy18 )
+reyreg = Registration.create!(team_name: 'Blue', registered: true, reg_type: 'Clubber', group_assignment: '3-5s',    person: rey, sessionyear: sy18 )
+layreg = Registration.create!(team_name: 'Blue', registered: true, reg_type: 'Clubber', group_assignment: '1st-6th', person: lay, sessionyear: sy18 )
+joereg = Registration.create!(team_name: 'Red',  registered: true, reg_type: 'Clubber', group_assignment: '1st-6th', person: joe, sessionyear: sy18 )
 
-puts "  - fake 2A scorecard rand) for Lay, 1st 10 club nights in 2018"
+puts "  - fake 2A scores rand) for Lay, 1st 10 club nights in 2018"
 a2 = Truthbook.find_by_name '2A'
 tb_secs = a2.truthbooksections.sorted.limit(50).to_a
 sy18.sessiondays.sorted.club_nights.limit(10).each do |sd|
@@ -110,8 +111,6 @@ sy18.sessiondays.sorted.club_nights.limit(10).each do |sd|
   loop_secs.each do |tb_sec| # grab the 1st X secs, loop
     tbsigna = Truthbooksignature.create!({
       clubber_id: lay.id,
-      signed_by_user_id: danu.id,
-      signed_date: sd.sd_date,
       truthbooksection_id: tb_sec.id
     })
     Score.create_truthbooksignature_score_for(lay, dan, tbsigna, att)
@@ -121,6 +120,9 @@ end
 
 lay_friend_att = lay.attendances_in(sy18).third
 lay_friend_score = Score.create_friend_score_for(lay, dan, lay_friend_att) # just for fun
+
+Score.create_team_score('Blue', 30, lay.attendances_in(sy18).fourth.sessionday.sd_date ,
+                          'Won review game', dan)
 =begin
 Comment.create!({
   comment

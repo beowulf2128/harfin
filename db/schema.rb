@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190316162636) do
+ActiveRecord::Schema.define(version: 20190320011634) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20190316162636) do
     t.string "reg_type"
     t.string "group_assignment"
     t.string "table_assignment"
+    t.string "team_name"
     t.integer "person_id"
     t.integer "sessionyear_id"
     t.datetime "created_at", null: false
@@ -52,6 +53,7 @@ ActiveRecord::Schema.define(version: 20190316162636) do
     t.integer "point_value"
     t.bigint "attendance_id"
     t.date "score_date"
+    t.string "team_name"
     t.integer "clubber_id"
     t.integer "recorded_by_id"
     t.datetime "created_at", null: false
@@ -104,9 +106,7 @@ ActiveRecord::Schema.define(version: 20190316162636) do
 
   create_table "truthbooksignatures", force: :cascade do |t|
     t.integer "truthbooksection_id"
-    t.datetime "signed_date"
     t.integer "sessionday_id"
-    t.integer "signed_by_user_id"
     t.integer "clubber_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

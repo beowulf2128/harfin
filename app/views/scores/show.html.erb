@@ -12,13 +12,19 @@
 <h2>Scores</h2>
 <table class="table table-hover table-condensed table-striped">
   <tr>
+    <th>Date</th>
     <th>Type</th>
+    <th>Truthbook</th>
+    <th>Rec'd by</th>
     <th>Points</th>
   </tr>
   <% @scores.each do |s|  %>
     <tr class="">
-      <td> <%= s.scoretype.name%> </td>
-      <td> <%= s.point_value%> </td>
+      <td><%= s.sessionday_date%> </td>
+      <td><%= s.score_type_name%> </td>
+      <td><%= Truthbooksection.formatted(s.truthbook_name, s.truthbook_unit, s.truthbook_section) %> </td>
+      <td><%= Person.name_fl(s.recby_last_name, s.recby_first_name) %> </td>
+      <td><%= s.point_value%> </td>
     </tr>
   <% end %>
 </table>

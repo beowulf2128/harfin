@@ -1,7 +1,7 @@
 class Score < ApplicationRecord
   belongs_to :scoretype
-  belongs_to :attendance
-  belongs_to :clubber, :class_name=>:Person, :foreign_key=>:clubber_id
+  belongs_to :attendance, optional: true
+  belongs_to :clubber, :class_name=>:Person, :foreign_key=>:clubber_id, optional: true
   belongs_to :recorded_by, :class_name=>:Person, :foreign_key=>:recorded_by_id
   belongs_to :truthbooksignature, optional: true
 
@@ -48,6 +48,18 @@ class Score < ApplicationRecord
       recorded_by: rec_by_person,
       attendance: attendance
     })
+  end
+
+  def self.create_team_score(team_name, point_value, score_date, comment, rec_by_person)
+    st = Scoretype.find_by_name('Team')
+    s = Score.create!({
+      team_name: team_name,
+      point_value: point_value,
+      scoretype: st,
+      score_date: score_date,
+      recorded_by: rec_by_person,
+    })
+    # TODO create comment for this score
   end
 
 end

@@ -5,7 +5,8 @@ class CreateScores < ActiveRecord::Migration[5.1]
       t.integer :point_value
       t.references :attendance, attendance: true, foreign_key: true
       t.date :score_date
-      t.integer :clubber_id
+      t.string  :team_name      # if the score applies to everyone on the team
+      t.integer :clubber_id     # if the score applies to a single clubber
       t.integer :recorded_by_id
 
       t.timestamps

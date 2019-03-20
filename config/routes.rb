@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   get 'utils/erd', to: 'utils#erd'
 
-  resources :scorecards
+  resources :scores
   resources :persons
   resources :users
   resources :sessionyears do

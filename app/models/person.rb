@@ -5,14 +5,25 @@ class Person < ApplicationRecord
   has_many   :truthbooksignatures, :class_name=> "Truthbooksignature", :foreign_key=>'clubber_id'
   has_many   :attendances, :class_name=>"Attendance", :foreign_key=>'attender_id'
   has_many   :scores, :class_name=>"Score", :foreign_key=>'clubber_id'
+  has_many   :vwscores, :class_name=>"Vwscore", :foreign_key=>'clubber_id'
 
   scope :sorted, lambda { order('last_name, first_name') }
 
   def name_lf
-    [last_name, first_name].delete_if{|n| n.blank?}.join(', ')
+    Person.name_lf(last_name, first_name)
   end
   def name_fl
-    [first_name, last_name].delete_if{|n| n.blank?}.join(' ')
+    Person.name_fl(last_name, first_name)
+  end
+  def self.name_lf(ln, fn)
+    [ln, fn].delete_if{|n| n.blank?}.join(', ')
+  end
+  def self.name_fl(ln, fn)
+    [fn, ln].delete_if{|n| n.blank?}.join(' ')
+  end
+
+  def current_registration()
+    Registration.for_person_in(self, Sessionyear.current).first
   end
 
   def attendances_in(sessionyear)
