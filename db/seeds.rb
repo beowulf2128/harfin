@@ -23,6 +23,7 @@ Scoretype.create!(name: 'Final',            suggested_point_value: 30,active: tr
 Scoretype.create!(name: 'Friend',           suggested_point_value: 30,active: true)
 Scoretype.create!(name: 'ThemeParticipation', suggested_point_value: 30,active: true)
 Scoretype.create!(name: 'Team',             suggested_point_value: 15,active: true)
+Scoretype.create!(name: 'StorePurchase',    suggested_point_value: -100,active: true)
 
 puts "  - 12 truthbooks"
 Truthbook.create!([
