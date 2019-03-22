@@ -37,6 +37,6 @@ class CreateScoresView < ActiveRecord::Migration[5.1]
   end
 
   def down
-    execute " DROP VIEW vwscores"
+    execute " DROP VIEW IF EXISTS vwscores"
   end
 end
