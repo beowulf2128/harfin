@@ -89,9 +89,9 @@ megu = User.create!(email: 'meg@meg.com', password: 'meg', person_id: meg.id)
 
 
 puts "  - fake registrations for 2018-19"
-reyreg = Registration.create!(team_name: 'Blue', registered: true, reg_type: 'Clubber', group_assignment: '3-5s',    person: rey, sessionyear: sy18 )
-layreg = Registration.create!(team_name: 'Blue', registered: true, reg_type: 'Clubber', group_assignment: '1st-6th', person: lay, sessionyear: sy18 )
-joereg = Registration.create!(team_name: 'Red',  registered: true, reg_type: 'Clubber', group_assignment: '1st-6th', person: joe, sessionyear: sy18 )
+reyreg = Registration.create!(table_assignment: 3, team_name: 'Blue', registered: true, reg_type: 'Clubber', group_assignment: '3-5s',    person: rey, sessionyear: sy18 )
+layreg = Registration.create!(table_assignment: 2, team_name: 'Blue', registered: true, reg_type: 'Clubber', group_assignment: '1st-6th', person: lay, sessionyear: sy18 )
+joereg = Registration.create!(table_assignment: 4, team_name: 'Red',  registered: true, reg_type: 'Clubber', group_assignment: '1st-6th', person: joe, sessionyear: sy18 )
 
 puts "  - fake 2A scores rand) for Lay, 1st 10 club nights in 2018"
 a2 = Truthbook.find_by_name '2A'

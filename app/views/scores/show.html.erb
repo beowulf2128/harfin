@@ -1,30 +1,31 @@
 <h1> <%= @sy.year  %> Scorecard: <%= @person.name_fl %></h1>
 <ul class="list-inline">
-  <li class="truth-book"><%= 'Book 3A?' %></li>
-  <li class="blue-team"><%= 'Blue Team?' %></li>
+  <li class="truth-book">Truthbook: <%= @person.current_truthbook.name %></li>
+  <% color = @person.current_registration.team_name %>
+  <li class="<%= color.downcase %>-team"><%= color %> Team</li>
   <li class="table-assignment">Table <%= @registration.table_assignment %></li>
-  <li class="scorecard-points"><%= '450 points?' %></li>
+  <li class="scorecard-points">Total Points: <%= @person.current_points %></li>
   <li class="award-pace"><%= 'Pace ###&&&**' %></li>
 </ul>
 <h2>Next Sections</h2>
 <p>Tonight:  book | bible | Theme | custom</p>
-
+<pre>
+  <%= @scoresheet.inspect %>
+</pre>
 <h2>Scores</h2>
 <table class="table table-hover table-condensed table-striped">
   <tr>
     <th>Date</th>
-    <th>Type</th>
+    <th>Bk/Bible/Att</th>
     <th>Truthbook</th>
     <th>Rec'd by</th>
     <th>Points</th>
   </tr>
-  <% @scores.each do |s|  %>
+  <% @scoresheet.lines.each do |line_date, line_data|  %>
     <tr class="">
-      <td><%= s.sessionday_date%> </td>
-      <td><%= s.score_type_name%> </td>
-      <td><%= Truthbooksection.formatted(s.truthbook_name, s.truthbook_unit, s.truthbook_section) %> </td>
-      <td><%= Person.name_fl(s.recby_last_name, s.recby_first_name) %> </td>
-      <td><%= s.point_value%> </td>
+      <td><%= line_date %> </td>
+      <td><%= book_bible_att(line_data) %> </td>
+      <td><%= tb_signas(line_data)%> </td>
     </tr>
   <% end %>
 </table>

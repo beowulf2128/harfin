@@ -23,7 +23,23 @@ class Person < ApplicationRecord
   end
 
   def current_registration()
-    Registration.for_person_in(self, Sessionyear.current).first
+    @current_registration ||= Registration.for_person_in(self, Sessionyear.current).first
+  end
+
+=begin
+  def current_truthbook_section
+    @current_truthbook_section ||=  Truthbooksection.current_tbsec_sort_for_user_sql ...NEEDED? TODO
+  end
+=end
+
+  def current_truthbook
+    @current_truthbook ||= Truthbook.where("(truthbooksections.sort-1) = #{Truthbooksection.current_tbsec_sort_for_user_sql(self.id)}").
+                              joins(:truthbooksections).first
+
+  end
+
+  def next_truthbook_section
+    truthbooksignatures.joins(:truthbooksection).maximum('truthbooksections.sort')+1
   end
 
   def attendances_in(sessionyear)
@@ -34,5 +50,9 @@ class Person < ApplicationRecord
     # join back to parent tables
     scores.joins(:attendance=>:sessionday).where(:sessiondays=>{:sessionyear_id=>sessionyear.id} )
 
+  end
+
+  def current_points
+    @current_points ||= scores_in(Sessionyear.current).sum(:point_value)
   end
 end

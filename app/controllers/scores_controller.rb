@@ -4,8 +4,8 @@ class ScoresController < ApplicationController
     @registration = Registration.find params[:id]
     @person = @registration.person
     @sy = @registration.sessionyear
-    @truthbooksignatures = @person.truthbooksignatures.limit(50)
-    @scores = Vwscore.scores_for(@person, @sy).ordered
+    scores = Vwscore.scores_for(@person, @sy).ordered
+    @scoresheet = Scoresheet.new(scores)
   end
 
   def update
