@@ -19,11 +19,12 @@
 
   <tbody>
     <% @registrations.each do |registration| %>
+      <% person = registration.person %>
       <tr>
-        <td><%= link_to registration.person.name_lf, registration %></td>
-        <td><%= registration.team_name %></td>
-        <td><%= registration.person.current_truthbook.name %></td>
-        <td><%= registration.person.current_points %></td>
+        <td><%= link_to person.name_lf, registration %></td>
+        <td><%= team_color(person) %></td>
+        <td><%= person.current_truthbook.name %></td>
+        <td><%= person.current_points %></td>
         <td><%= 'pace???' %></td>
         <td><%= link_to 'Scoresheet', "/scores/#{registration.id}"  %></td>
         <td><%= link_to 'Edit', edit_registration_path(registration) %></td>
