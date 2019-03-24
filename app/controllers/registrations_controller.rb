@@ -7,7 +7,7 @@ class RegistrationsController < ApplicationController
   def index
     sy_id = params[:sessionyear_id]
     @selected_session_year = sy_id.present? ? Sessionyear.find(sy_id) : Sessionyear.current_or_next
-    @all_session_years = Sessionyear.all.sorted - [@selected_session_year]
+    @all_session_years = Sessionyear.all.sorted
     @registrations = @selected_session_year.registrations
   end
 

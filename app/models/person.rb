@@ -33,8 +33,10 @@ class Person < ApplicationRecord
 =end
 
   def current_truthbook
-    @current_truthbook ||= Truthbook.where("(truthbooksections.sort-1) = #{Truthbooksection.current_tbsec_sort_for_user_sql(self.id)}").
-                              joins(:truthbooksections).first
+    return @current_truthbook unless @current_truthbook.nil?
+    sub_sql = Truthbooksection.current_tbsec_sort_for_user_sql(self.id)
+    tb = Truthbook.where("(truthbooksections.sort-1) = #{sub_sql}").joins(:truthbooksections).first
+    @current_truthbook = tb || Truthbook.new # blank book
 
   end
 
