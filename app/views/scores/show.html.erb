@@ -1,11 +1,20 @@
+<% stats = @registration.progress_stats %>
+
 <h1> <%= @sy.year  %> Scorecard: <%= @person.name_fl %></h1>
 <ul class="list-inline">
   <li class="truth-book">Truthbook: <%= @person.current_truthbook.name %></li>
   <li><%= team_color(@person) %> </li>
   <li class="table-assignment">Table <%= @registration.table_assignment %></li>
   <li class="scorecard-points">Total Points: <%= @person.current_points %></li>
-  <li class="award-pace"><%= 'Pace ###&&&**' %></li>
+  <li class="">Total Signas: <%=  stats[:signas_count] %></li>
 </ul>
+<h2>Stats</h2>
+<dl>
+  <dt>Signas per Att</dt> <dd><%= stats[:signas_per_attendance] %></dd>
+  <dt>% to Silver</dt> <dd><%= num_to_pc stats[:pc_to_silver] %> (<%= stats[:signas_to_silver] %> to go!)</dd>
+  <dt>% to Gold</dt> <dd><%= num_to_pc stats[:pc_to_gold] %> (<%= stats[:signas_to_gold]  %> to go!)</dd>
+</dl>
+
 <h2>Next Sections</h2>
 <p>Tonight:  book | bible | Theme | custom</p>
 <pre>

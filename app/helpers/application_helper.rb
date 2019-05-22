@@ -1,4 +1,9 @@
 module ApplicationHelper
+
+  def num_to_pc(num)
+    number_to_percentage(num *100, :precision => 0)
+  end
+
   def book_bible_att(line_data)
     ld = line_data
     s = []

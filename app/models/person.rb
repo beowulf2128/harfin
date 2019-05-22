@@ -57,4 +57,5 @@ class Person < ApplicationRecord
   def current_points
     @current_points ||= scores_in(Sessionyear.current).sum(:point_value)
   end
+
 end
