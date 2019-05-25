@@ -1,5 +1,12 @@
 module ApplicationHelper
 
+  def gold_pace(stats)
+    "% to Gold: #{num_to_pc stats[:pc_to_gold]} (#{stats[:signas_to_gold]} to go!)"
+  end
+  def silver_pace(stats)
+    "% to Silver: #{num_to_pc stats[:pc_to_silver]} (#{stats[:signas_to_silver]} to go!)"
+  end
+
   def num_to_pc(num)
     number_to_percentage(num *100, :precision => 0)
   end
@@ -14,30 +21,28 @@ module ApplicationHelper
   end
 
   def book_bible_att(line_data)
-    ld = line_data
-    s = []
-    s << ld['Book'].first.out  if ld['Book'].present?
-    s << ld['Bible'].first.out if ld['Bible'].present?
-    s << ld['Attendance'].first.out if ld['Attendance'].present?
-    s.join(' ')
+    labelize_scores(line_data, %w{Book Bible Attendance})
   end
 
   def tb_signas(line_data)
-    ld = line_data
-    s = []
-    s << ld['Section'].map(&:out)  if ld['Section'].present?
-    s << ld['Training'].map(&:out)  if ld['Training'].present?
-    s << ld['Final'].map(&:out)  if ld['Final'].present?
-    s.join(' ')
+    labelize_scores(line_data, %w{Section Training Final})
   end
 
   def other_scores(line_data)
+    labelize_scores(line_data, %w{Friend ThemeParticipation Team})
+  end
+
+  # score_types - Book, Section, Friend, etc
+  def labelize_scores(line_data, score_types)
     ld = line_data
     s = []
-    s << ld['Friend'].map(&:out)  if ld['Friend'].present?
-    s << ld['ThemeParticipation'].map(&:out)  if ld['ThemeParticipation'].present?
-    s << ld['Team'].map(&:out)  if ld['Team'].present?
-    s.join(' ')
+    score_types.each do |st|
+      if ld[st].present?
+        scores = ld[st].map(&:out)
+        s << scores.map {|s| %Q~<span class="label label-#{st} margLR3">#{s}</span>~ }
+      end
+    end
+    s.join(' ').html_safe
   end
 
   def team_color(person)

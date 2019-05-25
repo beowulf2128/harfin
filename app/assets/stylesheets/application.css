@@ -46,3 +46,16 @@
   color: red;
 }
 
+.label-Book { background-color: #C66} /* browns */
+.label-Bible { background-color: #933}
+.label-Attendance { background-color: #C63}
+.label-Section { background-color: #594F4F} /* palette: https://www.colourlovers.com/palette/443995/i_demand_a_pancake */
+.label-Training { background-color: #547985}
+.label-Final { background-color: #45ADA8}
+.label-Friend { background-color: #C09} /* fuschia */
+.label-ThemeParticipation { background-color: #36F} /* blue */
+.label-Team { background-color: #360} /* greenish */
+.margLR3 {
+  margin-left: 3px;
+  margin-right: 3px;
+}

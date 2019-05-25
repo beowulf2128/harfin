@@ -10,8 +10,8 @@
 </ul>
 <ul class="list-inline">
   <li>Signas per Att: <%= stats[:signas_per_attendance] %></li>
-  <li>% to Silver: <%= num_to_pc stats[:pc_to_silver] %> (<%= stats[:signas_to_silver] %> to go!)</li>
-  <li>% to Gold: <%= num_to_pc stats[:pc_to_gold] %> (<%= stats[:signas_to_gold]  %> to go!)</li>
+  <li><%= silver_pace(stats) %></li>
+  <li><%= gold_pace(stats) %></li>
 </ul>
 
 <h2>Next Sections</h2>
