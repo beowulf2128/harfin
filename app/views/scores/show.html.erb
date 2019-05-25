@@ -8,18 +8,15 @@
   <li class="scorecard-points">Total Points: <%= @person.current_points %></li>
   <li class="">Total Signas: <%=  stats[:signas_count] %></li>
 </ul>
-<h2>Stats</h2>
-<dl>
-  <dt>Signas per Att</dt> <dd><%= stats[:signas_per_attendance] %></dd>
-  <dt>% to Silver</dt> <dd><%= num_to_pc stats[:pc_to_silver] %> (<%= stats[:signas_to_silver] %> to go!)</dd>
-  <dt>% to Gold</dt> <dd><%= num_to_pc stats[:pc_to_gold] %> (<%= stats[:signas_to_gold]  %> to go!)</dd>
-</dl>
+<ul class="list-inline">
+  <li>Signas per Att: <%= stats[:signas_per_attendance] %></li>
+  <li>% to Silver: <%= num_to_pc stats[:pc_to_silver] %> (<%= stats[:signas_to_silver] %> to go!)</li>
+  <li>% to Gold: <%= num_to_pc stats[:pc_to_gold] %> (<%= stats[:signas_to_gold]  %> to go!)</li>
+</ul>
 
 <h2>Next Sections</h2>
 <p>Tonight:  book | bible | Theme | custom</p>
-<pre>
-  <%= @scoresheet.inspect %>
-</pre>
+
 <h2>Scores</h2>
 <table class="table table-hover table-condensed table-striped">
   <tr>
