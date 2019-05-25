@@ -24,9 +24,9 @@
 <table class="table table-hover table-condensed table-striped">
   <tr>
     <th>Date</th>
-    <th>Bk/Bible/Att</th>
+    <th>Bk/Bible/Att</th> <%# Recorded by belongs to each score, not the line  %>
     <th>Truthbook</th>
-    <th>Rec'd by</th>
+    <th>Other</th>
     <th>Points</th>
   </tr>
   <% @scoresheet.lines.each do |line_date, line_data|  %>
@@ -34,6 +34,8 @@
       <td><%= line_date %> </td>
       <td><%= book_bible_att(line_data) %> </td>
       <td><%= tb_signas(line_data)%> </td>
+      <td><%= other_scores(line_data)%> </td>
+      <td><%= accum_line_pts(line_data) %></td>
     </tr>
   <% end %>
 </table>

@@ -4,6 +4,15 @@ module ApplicationHelper
     number_to_percentage(num *100, :precision => 0)
   end
 
+  # Add up Book/Bible/section/all scores
+  def accum_line_pts(line_data)
+    pts = 0
+    line_data.each do |score_type, scores| # key, val
+      pts += scores.sum {|score| score.point_value }
+    end
+    pts
+  end
+
   def book_bible_att(line_data)
     ld = line_data
     s = []
@@ -19,6 +28,15 @@ module ApplicationHelper
     s << ld['Section'].map(&:out)  if ld['Section'].present?
     s << ld['Training'].map(&:out)  if ld['Training'].present?
     s << ld['Final'].map(&:out)  if ld['Final'].present?
+    s.join(' ')
+  end
+
+  def other_scores(line_data)
+    ld = line_data
+    s = []
+    s << ld['Friend'].map(&:out)  if ld['Friend'].present?
+    s << ld['ThemeParticipation'].map(&:out)  if ld['ThemeParticipation'].present?
+    s << ld['Team'].map(&:out)  if ld['Team'].present?
     s.join(' ')
   end
 
