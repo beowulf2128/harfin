@@ -1,0 +1,20 @@
+<%# locals params:
+  #   color - "Gold" or "Silver"
+  #   stats - hash
+%>
+
+<% num = 100 * stats["pc_to_#{color.downcase}".to_sym] %>
+<div class="progress" style="margin-bottom:0px;">
+  <div
+    class="progress-bar gradient-bg-<%=color%>"
+    role="progressbar"
+    aria-valuenow="<%= num %>"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    style="width: <%= num %>%; "
+  >
+    <div class="award-prog-bar-text">
+      <%= send("#{color.downcase}_pace".to_sym, stats) %>
+    </div>
+  </div>
+</div>

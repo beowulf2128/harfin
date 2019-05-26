@@ -14,12 +14,13 @@ class Registration < ApplicationRecord
   validates :team_name, inclusion: {in: [RED, BLUE] }
 
   def progress_stats
+    return @progress_stats if @progress_stats.present?
     sy = self.sessionyear
     clubber = self.person
     signas_count = clubber.scores_in(sy).joins(:scoretype).
                                  where(scoretypes:{name:Scoretype::SIGNA_TYPES}).count
     atts_count = clubber.attendances_in(sy).count
-    return {
+    @progress_stats = {
       signas_count: signas_count,
       signas_per_attendance: signas_count.to_f / atts_count.to_f,
       pc_to_gold: signas_count.to_f / self.signas_awards[:Gold].to_f,

@@ -1,10 +1,10 @@
 module ApplicationHelper
 
   def gold_pace(stats)
-    "% to Gold: #{num_to_pc stats[:pc_to_gold]} (#{stats[:signas_to_gold]} to go!)"
+    "#{num_to_pc stats[:pc_to_gold]} to gold (#{stats[:signas_to_gold]} to go!)"
   end
   def silver_pace(stats)
-    "% to Silver: #{num_to_pc stats[:pc_to_silver]} (#{stats[:signas_to_silver]} to go!)"
+    "#{num_to_pc stats[:pc_to_silver]} to silver (#{stats[:signas_to_silver]} to go!)"
   end
 
   def num_to_pc(num)

@@ -26,7 +26,9 @@
         <td><%= team_color(person) %></td>
         <td><%= person.current_truthbook.name %></td>
         <td><%= person.current_points %></td>
-        <td><%= gold_pace(stats) %></td>
+        <td>
+          <%= render partial: 'scores/award_progress_bar', locals: {stats:stats, color: 'Gold'} %>
+        </td>
         <td><%= link_to 'Scoresheet', "/scores/#{registration.id}"  %></td>
         <td><%= link_to 'Edit', edit_registration_path(registration) %></td>
         <td><%= link_to 'Destroy', registration, method: :delete, data: { confirm: 'Are you sure?' } %></td>

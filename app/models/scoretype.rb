@@ -4,7 +4,7 @@ class Scoretype < ApplicationRecord
   SIGNA_TYPES = %w{Section Training Final}
 
   SIGNAS_AWARDS = {}
-  SIGNAS_AWARDS[Registration::OLDER] = {'Gold':72, 'Silver':60}
+  SIGNAS_AWARDS[Registration::OLDER] = {'Gold':72, 'Silver':48}
   SIGNAS_AWARDS[Registration::YOUNGER] = {'Gold':48, 'Silver':32}
 
   def self.book

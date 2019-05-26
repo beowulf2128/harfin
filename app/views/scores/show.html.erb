@@ -6,18 +6,26 @@
   <li><%= team_color(@person) %> </li>
   <li class="table-assignment">Table <%= @registration.table_assignment %></li>
   <li class="scorecard-points">Total Points: <%= @person.current_points %></li>
-  <li class="">Total Signas: <%=  stats[:signas_count] %></li>
-</ul>
-<ul class="list-inline">
-  <li>Signas per Att: <%= stats[:signas_per_attendance] %></li>
-  <li><%= silver_pace(stats) %></li>
-  <li><%= gold_pace(stats) %></li>
+  <li class="">
+    Total Signas: <%=  stats[:signas_count] %>
+    (<%= stats[:signas_per_attendance] %> / att.)
+  </li>
 </ul>
 
 <h2>Next Sections</h2>
 <p>Tonight:  book | bible | Theme | custom</p>
 
+<div style="display: flex; justify-content: space-between; align-items: flex-end;">
 <h2>Scores</h2>
+<ul class="list-inline">
+  <li>
+    <%= render partial: 'scores/award_progress_bar', locals: {stats: stats, color: 'Silver'} %>
+  </li>
+  <li>
+    <%= render partial: 'scores/award_progress_bar', locals: {stats: stats, color: 'Gold'} %>
+  </li>
+</ul>
+</div>
 <table class="table table-hover table-condensed table-striped">
   <tr>
     <th>Date</th>

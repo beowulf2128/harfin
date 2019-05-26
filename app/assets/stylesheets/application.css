@@ -46,6 +46,7 @@
   color: red;
 }
 
+/* Scoresheet score bubbles **********/
 .label-Book { background-color: #C66} /* browns */
 .label-Bible { background-color: #933}
 .label-Attendance { background-color: #C63}
@@ -58,4 +59,25 @@
 .margLR3 {
   margin-left: 3px;
   margin-right: 3px;
+}
+
+/* Progress bar for awards pace ***********/
+.award-prog-bar {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.gradient-bg-Gold {
+  background-image: linear-gradient(#FFD700, #d7af00); /* gold, dark gold */
+}
+.gradient-bg-Silver {
+  background-image: linear-gradient(#c0c0c0, #a9a9a9); /* silver, dark silver */
+}
+
+.award-prog-bar-text {
+  overflow: visible;
+  white-space: nowrap;
+  color: #333;
+  margin: 0 5px;
+
 }
