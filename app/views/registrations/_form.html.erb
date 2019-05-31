@@ -18,19 +18,19 @@
   </div>
   <div class='form-group'>
     <%= f.label :type %>
-    <%= f.select :reg_type, %w{Clubber Leader} %>
+    <%= f.select :reg_type, %w{Clubber Leader}, {}, class:"form-control" %>
   </div>
   <div class='form-group'>
     <%= f.label :group_assignment %>
-    <%= f.select :group_assignment, %w{1st-6th 3-5s} %>
+    <%= f.select :group_assignment, %w{1st-6th 3-5s}, {}, class:"form-control"  %>
   </div>
   <div class='form-group'>
     <%= f.label :table_assignment %>
-    <%= f.select :table_assignment, (1..12) %>
+    <%= f.select :table_assignment, (1..12) , {}, class:"form-control" %>
   </div>
   <div class='form-group'>
     <%= f.label :sessionyear %>
-    <%= f.select :sessionyear_id,  Sessionyear.vals_for_select %>
+    <%= f.select :sessionyear_id,  Sessionyear.vals_for_select, {}, class:"form-control"  %>
   </div>
   <div class='form-group'>
     <%#= f.label :background_check %>
