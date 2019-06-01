@@ -50,4 +50,7 @@ module ApplicationHelper
     "<span class='#{color.downcase}-team'>#{color} Team</span>".html_safe
   end
 
+  def tbl_css
+    "table table-striped table-hover table-sm table-responsive-sm"
+  end
 end

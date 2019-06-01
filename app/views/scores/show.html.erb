@@ -27,21 +27,18 @@
   </li>
 </ul>
 
-<h2>Next Sections</h2>
-<p>Tonight:  book | bible | Theme | custom</p>
 
-<div style="display: flex; justify-content: space-between; align-items: flex-end;">
-<h2>Scores</h2>
-<ul class="list-inline">
-  <li>
+<div class="d-flex">
+  <h2 class="flex-grow-1">Scores</h2>
+  <div>
     <%= render partial: 'scores/award_progress_bar', locals: {stats: stats, color: 'Silver'} %>
-  </li>
-  <li>
+  </div>
+  <div class="">
     <%= render partial: 'scores/award_progress_bar', locals: {stats: stats, color: 'Gold'} %>
-  </li>
-</ul>
+
+  </div>
 </div>
-<table class="table table-hover table-condensed table-striped">
+<table class="<%= tbl_css %>">
   <tr>
     <th>Date</th>
     <th>Bk/Bible/Att</th> <%# Recorded by belongs to each score, not the line  %>
@@ -49,7 +46,26 @@
     <th>Other</th>
     <th>Points</th>
   </tr>
-  <% @scoresheet.lines.each do |line_date, line_data|  %>
+  <tr>
+    <td>date</td>
+    <td>
+      <%= render partial: 'scores/quick_add', locals: {
+        avail_scores: @next_avail_bba_scores,
+        heading: 'Today'} %>
+    </td>
+    <td>
+      <%= render partial: 'scores/quick_add', locals: {
+        avail_scores: @next_avail_section_scores,
+        heading: 'Next Sections'} %>
+    </td>
+    <td>
+      <%= render partial: 'scores/quick_add', locals: {
+        avail_scores: @next_avail_other_scores,
+        heading: 'Other'} %>
+    </td>
+    <td></td>
+  </tr>
+  <% @scoresheet.lines.reverse_each do |line_date, line_data|  %>
     <tr class="">
       <td><%= line_date %> </td>
       <td><%= book_bible_att(line_data) %> </td>

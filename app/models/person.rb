@@ -40,8 +40,14 @@ class Person < ApplicationRecord
 
   end
 
-  def next_truthbook_section
+  def next_truthbook_section_sort_id
     truthbooksignatures.joins(:truthbooksection).maximum('truthbooksections.sort')+1
+  end
+
+  # TODO include skipped sections first!!!
+  def next_truthbook_sections(how_many=5)
+    next_id = next_truthbook_section_sort_id
+    Truthbooksection.where(sort: next_id..(next_id+how_many-1)).sorted
   end
 
   def attendances_in(sessionyear)

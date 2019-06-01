@@ -23,4 +23,37 @@ class Scoresheet
     by_date
   end
 
+  def self.avail_bk_bib_att_scores #TODO for a date or club night
+    Scoretype.where(name: Scoretype::BBA_TYPES).collect do |st|
+      Scoresheet.to_avail(st)
+    end
+  end
+
+  def self.avail_section_scores(person)
+    person.next_truthbook_sections.collect do |s|
+      Scoresheet.to_avail(s)
+    end
+  end
+  def self.avail_other_scores #TODO for a date or club night
+    Scoretype.where(name: Scoretype::OTHER_TYPES).collect do |st|
+      Scoresheet.to_avail(st)
+    end
+  end
+
+  def self.to_avail(scoretype_or_truthbooksection)
+    s = scoretype_or_truthbooksection
+    if s.class == Scoretype
+      return OpenStruct.new({
+        name: s.name,
+        type: s.name,
+        points: s.suggested_point_value
+      })
+    else
+      return OpenStruct.new({
+        name: s.out,
+        type: s.section_type,
+        points: s.scoretype.suggested_point_value
+      })
+    end
+  end
 end

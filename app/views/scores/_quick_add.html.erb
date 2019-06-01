@@ -1,0 +1,28 @@
+<%#
+  locals:
+    avail_scores - array of OpenStructs created by Scoresheet.to_avail()
+    date OR sessionday
+    heading - heading of the dropdown
+%>
+<div class="dropdown">
+  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" data-display="static">
+    +
+  </button>
+  <div class="dropdown-menu">
+    <h5><%= heading %></h5>
+    <form >
+      <div class="form-group">
+        <% avail_scores.each do |nas| %>
+          <div class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" id="customSwitch-<%=nas.name%>">
+            <label class="custom-control-label" for="customSwitch-<%=nas.name%>">
+              <span class="badge label-<%=nas.type%>"><%= nas.name%>: <%= nas.points %></span>
+            </label>
+          </div>
+        <% end %>
+      </div>
+      <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+  </div>
+</div>
+

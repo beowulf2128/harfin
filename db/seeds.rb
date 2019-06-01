@@ -14,6 +14,7 @@ puts "reference data"
 
 
 puts "  - scoretypes"
+Scoretype.create!(name: 'Attendance',       suggested_point_value: 5,active: true)
 Scoretype.create!(name: 'Book',             suggested_point_value: 5,active: true)
 Scoretype.create!(name: 'Bible',            suggested_point_value: 5,active: true)
 Scoretype.create!(name: 'Standard',         suggested_point_value: 5,active: false)
@@ -57,6 +58,8 @@ Truthbook.where(edition: 'rbp1').order(:name).each do |tb|
     end # sections
   end # units
 end
+require './20190601024658_add_is_scoretype_id_to_truthbooksection'
+AddIsScoretypeIdToTruthbooksection.fill_scoretype_ids
 
 puts "  - session years"
 sy15 = Sessionyear.create!(start_date: Date.parse('August 01, 2015'), end_date: Date.parse('June 01, 2016'), theme: "15-16 theme" )

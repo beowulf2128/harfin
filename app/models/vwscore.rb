@@ -2,7 +2,7 @@ class Vwscore < ActiveRecord::Base
   belongs_to :clubber, :class_name=>:Person, :foreign_key=>:clubber_id
   belongs_to :sessionyear
 
-  scope :ordered, ->{ order('score_date DESC') }
+  scope :ordered, ->{ order('id ASC') } # TODO by score_date OR sessionday date
 
   def display_date
     score_date || sessionday_date

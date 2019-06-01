@@ -1,10 +1,11 @@
 class Truthbooksection < ApplicationRecord
   belongs_to :truthbook
+  belongs_to :scoretype
 
   scope :sorted, -> { order(:sort) }
 
   def out
-    formatted(truthbook.name, unit, section)
+    Truthbooksection.formatted(truthbook.name, unit, section)
   end
 
   def section_type
