@@ -41,9 +41,12 @@
 
 .blue-team {
   color: blue;
+  border: 2px dotted blue;
 }
 .red-team {
   color: red;
+  border: 2px dotted red;
+
 }
 
 /* Scoresheet score bubbles **********/
