@@ -39,7 +39,7 @@ module ApplicationHelper
     score_types.each do |st|
       if ld[st].present?
         scores = ld[st].map(&:out)
-        s << scores.map {|s| %Q~<span class="label label-#{st} margLR3">#{s}</span>~ }
+        s << scores.map {|s| %Q~<span class="badge label-#{st} margLR3">#{s}</span>~ }
       end
     end
     s.join(' ').html_safe

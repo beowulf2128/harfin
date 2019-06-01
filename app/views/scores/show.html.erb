@@ -1,13 +1,28 @@
 <% stats = @registration.progress_stats %>
 
 <h1> <%= @sy.year  %> Scorecard: <%= @person.name_fl %></h1>
-<ul class="list-inline">
-  <li class="truth-book">Truthbook: <%= @person.current_truthbook.name %></li>
-  <li><%= team_color(@registration) %> </li>
-  <li class="table-assignment">Table <%= @registration.table_assignment %></li>
-  <li class="scorecard-points">Total Points: <%= @registration.points %></li>
-  <li class="">
-    Total Signas: <%=  stats[:signas_count] %>
+<ul class="list-group list-group-horizontal">
+  <li class="list-group-item">Truthbook:
+    <span class="badge badge-info badge-pill">
+      <%= @person.current_truthbook.name %>
+    </span>
+  </li>
+  <li class="list-group-item"> <%= team_color(@registration) %> </li>
+  <li class="list-group-item">Table
+    <span class="badge badge-info badge-pill">
+      <%= @registration.table_assignment %>
+    </span>
+  </li>
+  <li class="list-group-item">Total Points:
+    <span class="badge badge-info badge-pill">
+      <%= @registration.points %>
+    </span>
+  </li>
+  <li class="list-group-item">
+    Total Signas:
+    <span class="badge badge-info badge-pill">
+      <%=  stats[:signas_count] %>
+    </span>
     (<%= stats[:signas_per_attendance] %> / att.)
   </li>
 </ul>
