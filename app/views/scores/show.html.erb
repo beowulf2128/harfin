@@ -3,9 +3,9 @@
 <h1> <%= @sy.year  %> Scorecard: <%= @person.name_fl %></h1>
 <ul class="list-inline">
   <li class="truth-book">Truthbook: <%= @person.current_truthbook.name %></li>
-  <li><%= team_color(@person) %> </li>
+  <li><%= team_color(@registration) %> </li>
   <li class="table-assignment">Table <%= @registration.table_assignment %></li>
-  <li class="scorecard-points">Total Points: <%= @person.current_points %></li>
+  <li class="scorecard-points">Total Points: <%= @registration.points %></li>
   <li class="">
     Total Signas: <%=  stats[:signas_count] %>
     (<%= stats[:signas_per_attendance] %> / att.)

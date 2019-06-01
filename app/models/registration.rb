@@ -34,8 +34,12 @@ class Registration < ApplicationRecord
     Scoretype::SIGNAS_AWARDS[self.group_assignment]
   end
 
+  def points
+    @points ||= self.person.scores_in(self.sessionyear).sum(:point_value)
+  end
+
   def self.for_person_in(person, sessionyear)
-    person.registrations.where(sessionyear: sessionyear)
+    person.registrations.where(sessionyear: sessionyear).first
   end
 
 end

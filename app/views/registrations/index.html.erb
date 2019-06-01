@@ -31,9 +31,9 @@
       <% stats = registration.progress_stats %>
       <tr>
         <td><%= link_to person.name_lf, registration %></td>
-        <td><%= team_color(person) %></td>
+        <td><%= team_color(registration) %></td>
         <td><%= person.current_truthbook.name %></td>
-        <td><%= person.current_points %></td>
+        <td><%= registration.points %></td>
         <td>
           <%= render partial: 'scores/award_progress_bar', locals: {stats:stats, color: 'Gold'} %>
         </td>

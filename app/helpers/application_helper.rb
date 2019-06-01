@@ -45,8 +45,8 @@ module ApplicationHelper
     s.join(' ').html_safe
   end
 
-  def team_color(person)
-    color = person.current_registration.team_name
+  def team_color(registration)
+    color = registration.team_name
     "<span class='#{color.downcase}-team'>#{color} Team</span>".html_safe
   end
 
