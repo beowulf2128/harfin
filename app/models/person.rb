@@ -41,7 +41,7 @@ class Person < ApplicationRecord
   end
 
   def next_truthbook_section_sort_id
-    truthbooksignatures.joins(:truthbooksection).maximum('truthbooksections.sort')+1
+    (truthbooksignatures.joins(:truthbooksection).maximum('truthbooksections.sort') || 0) + 1
   end
 
   # TODO include skipped sections first!!!
