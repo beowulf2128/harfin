@@ -20,8 +20,8 @@ class Vwscore < ActiveRecord::Base
   def self.scores_for(person, sessionyear)
     sy = sessionyear
     registration = Registration.for_person_in(person, sy)
-    Vwscore.where(["clubber_id = ? or team_name = ?", person.id, registration.team_name]).
-            where(sessionyear: sy).or(Vwscore.where(score_date: sy.start_date..sy.end_date)).
+    Vwscore.where(sessionyear: sy).or(Vwscore.where(score_date: sy.start_date..sy.end_date)).
+            where(["clubber_id = ? or team_name = ?", person.id, registration.team_name]).
             ordered
   end
 
