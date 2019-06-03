@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   get 'utils/erd', to: 'utils#erd'
 
   resources :scores
+  post 'scores/quick_add', to: 'scores#quick_add'
+
   resources :persons
   resources :users
   resources :sessionyears do

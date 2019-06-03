@@ -7,7 +7,7 @@
     <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">Switch to...</button>
     <div class="dropdown-menu">
       <% (@all_session_years-[@selected_session_year]).each do |sy| %>
-        <%= link_to(sy.year, sessionyear_registrations_path(sy), class:"dropdown-item") %> |
+        <%= link_to(sy.year, sessionyear_registrations_path(sy), class:"dropdown-item") %>
       <% end %>
     </div>
   </div>
@@ -47,4 +47,4 @@
 
 <br>
 
-<%= link_to 'New Registration', new_registration_path, class:"btn btn-primary" %>
+<%#= link_to 'New Registration', new_registration_path, class:"btn btn-primary" %>

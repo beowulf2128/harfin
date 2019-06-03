@@ -10,8 +10,8 @@ class Registration < ApplicationRecord
   belongs_to :sessionyear
 
   validates :person_id, :sessionyear_id, presence: true
-  validates :group_assignment, inclusion: {in: [YOUNGER, OLDER] }
-  validates :team_name, inclusion: {in: [RED, BLUE] }
+  validates :group_assignment, inclusion: {in: [nil, YOUNGER, OLDER] }
+  validates :team_name, inclusion: {in: [nil, RED, BLUE] }
 
   def progress_stats
     return @progress_stats if @progress_stats.present?
@@ -20,9 +20,12 @@ class Registration < ApplicationRecord
     signas_count = clubber.scores_in(sy).joins(:scoretype).
                                  where(scoretypes:{name:Scoretype::SIGNA_TYPES}).count
     atts_count = clubber.attendances_in(sy).count
+		signas_per_att = signas_count.to_f / atts_count.to_f
+		signas_per_att = 0 if signas_per_att.nan?
+
     @progress_stats = {
       signas_count: signas_count,
-      signas_per_attendance: signas_count.to_f / atts_count.to_f,
+      signas_per_attendance: signas_per_att,
       pc_to_gold: signas_count.to_f / self.signas_awards[:Gold].to_f,
       pc_to_silver: signas_count.to_f / self.signas_awards[:Silver].to_f,
       signas_to_gold: self.signas_awards[:Gold] - signas_count,

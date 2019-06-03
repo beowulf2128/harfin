@@ -51,16 +51,19 @@
     <td>
       <%= render partial: 'scores/quick_add', locals: {
         avail_scores: @next_avail_bba_scores,
+        sessionday_id: nil,
         heading: 'Today'} %>
     </td>
     <td>
       <%= render partial: 'scores/quick_add', locals: {
         avail_scores: @next_avail_section_scores,
+        sessionday_id: nil,
         heading: 'Next Sections'} %>
     </td>
     <td>
       <%= render partial: 'scores/quick_add', locals: {
         avail_scores: @next_avail_other_scores,
+        sessionday_id: nil,
         heading: 'Other'} %>
     </td>
     <td></td>

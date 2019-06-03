@@ -46,14 +46,38 @@ class Scoresheet
       return OpenStruct.new({
         name: s.name,
         type: s.name,
-        points: s.suggested_point_value
+        points: s.suggested_point_value,
+        scoretype_id: s.id
       })
     else
       return OpenStruct.new({
         name: s.out,
         type: s.section_type,
-        points: s.scoretype.suggested_point_value
+        points: s.scoretype.suggested_point_value,
+        truthbooksection_id: s.id
       })
     end
+  end
+
+  def self.add_nonsection_scores(for_person, scoretype_id_hashes, sessionday_id, rec_by_person)
+    st_ids_to_add = []
+    scoretype_id_hashes.each do |id, on_off|
+      st_ids_to_add << id if Utils.cb_to_tf(on_off) == true
+    end
+    # sts_to_del = scoretype_id_hashes.collect {|id, on_off| id if Utils.cb_to_tf(on_off) == false}
+    Score.transaction do
+      st_ids_to_add.each do |id|
+        st = Scoretype.find(id)
+        Score.create!({
+          clubber: for_person,
+          scoretype: st,
+          point_value: st.suggested_point_value,
+          recorded_by: rec_by_person,
+          score_date: Time.now, # TODO now or nil if attendance,
+          team_name: nil # for team (non-person) scores
+        })
+      end
+    end
+    return ResultMgr.new
   end
 end

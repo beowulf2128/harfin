@@ -47,7 +47,8 @@ module ApplicationHelper
 
   def team_color(registration)
     color = registration.team_name
-    "<span class='#{color.downcase}-team'>#{color} Team</span>".html_safe
+    return "<span class='#{color.downcase}-team'>#{color} Team</span>".html_safe if color.present?
+    return 'Team Color?'
   end
 
   def tbl_css

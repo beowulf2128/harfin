@@ -1,7 +1,7 @@
 <%#
   locals:
     avail_scores - array of OpenStructs created by Scoresheet.to_avail()
-    date OR sessionday
+    sessionday_id - ID of club night. Nil interpreted as current time
     heading - heading of the dropdown
 %>
 <div class="dropdown">
@@ -10,11 +10,15 @@
   </button>
   <div class="dropdown-menu">
     <h5><%= heading %></h5>
-    <form >
+    <%= form_tag("/scores/quick_add", method:"post") do %>
+      <%= hidden_field_tag("sessionday_id", sessionday_id) %>
+      <%= hidden_field_tag("registration_id", params[:id]) %>
       <div class="form-group">
         <% avail_scores.each do |nas| %>
           <div class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input" id="customSwitch-<%=nas.name%>">
+            <% name = (nas.scoretype_id.present?) ? "scoretypes[#{nas.scoretype_id}]" : "truthbooksections[#{nas.truthbooksection_id}]" %>
+            <%= hidden_field_tag(name, '') %> <%# hidden field forces checkbox to submit even when OFF %>
+            <input name="<%= name %>" type="checkbox" class="custom-control-input" id="customSwitch-<%=nas.name%>">
             <label class="custom-control-label" for="customSwitch-<%=nas.name%>">
               <span class="badge label-<%=nas.type%>"><%= nas.name%>: <%= nas.points %></span>
             </label>
@@ -22,7 +26,7 @@
         <% end %>
       </div>
       <button type="submit" class="btn btn-primary">Save</button>
-    </form>
+    <% end %>
   </div>
 </div>
 

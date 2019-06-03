@@ -19,11 +19,6 @@
   padding: 10px;
   margin: 10px;
 }
-.alert {
-  border-left: 3px dashed red;
-  color: red;
-  background-color: pink;
-}
 .notice {
   border-left: 3px dashed blue;
   color: blue;

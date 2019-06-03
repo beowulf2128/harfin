@@ -6,4 +6,9 @@ module Utils
     d.sub(' 12:00am', '')
   end
 
+  # checkbox form submission value to true or false
+  def self.cb_to_tf(cb_val)
+    [true,"true", 1, "1", "on"].include?(cb_val)
+  end
+
 end
