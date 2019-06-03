@@ -31,7 +31,16 @@
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
           <li class="nav-item"><%= link_to "Persons", :persons, class: 'nav-link' %></li>
-          <li class="nav-item"><%= link_to "Registrations", :registrations, class: 'nav-link' %></li>
+          <li class="nav-item dropdown">
+        		<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" >
+          		Registrations
+        		</a>
+						<div class="dropdown-menu">
+              <%= link_to "Clubbers", :registrations, :class=> 'dropdown-item' %>
+							<a class="dropdown-item" href="#">Leaders</a>
+						</div>
+
+          </li>
           <li class="nav-item"><%= link_to "Session Years", :sessionyears, class: 'nav-link' %></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
