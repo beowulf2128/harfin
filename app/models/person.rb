@@ -46,8 +46,14 @@ class Person < ApplicationRecord
 
   # TODO include skipped sections first!!!
   def next_truthbook_sections(how_many=5)
-    next_id = next_truthbook_section_sort_id
-    Truthbooksection.where(sort: next_id..(next_id+how_many-1)).sorted
+    #next_id = next_truthbook_section_sort_id
+    #Truthbooksection.where(sort: next_id..(next_id+how_many-1)).sorted
+
+    tbk_start_sort = Truthbooksection.start_sort_for_book(self.current_truthbook)
+    Truthbooksection.
+      joins("LEFT JOIN truthbooksignatures signas ON (signas.truthbooksection_id = truthbooksections.id and signas.clubber_id = #{self.id} )").
+      where("signas.id is null").
+      where(["sort >= ?", tbk_start_sort]).sorted.limit(how_many)
   end
 
   def attendances_in(sessionyear)

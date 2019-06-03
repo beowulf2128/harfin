@@ -22,6 +22,12 @@ class Truthbooksection < ApplicationRecord
           clubber_id = #{person_id} ) ~
   end
 
+  # Returns the first truthbooksection sort number for a given book
+  # book_name - a/r model
+  def self.start_sort_for_book(truthbook)
+    Truthbooksection.joins(:truthbook).where(truthbook: truthbook).minimum(:sort)
+  end
+
   def self.formatted(book_name, unit, section)
     return '' if book_name.blank?
     "#{book_name} #{unit}-#{section}"
