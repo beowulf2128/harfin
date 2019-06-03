@@ -11,4 +11,16 @@ module Utils
     [true,"true", 1, "1", "on"].include?(cb_val)
   end
 
+  # Returns the hash keys where the value is checkbox truthy or falsy
+  # Params:
+  #   cb_hash - {"1"=>"on", "2"=>"", "3"=>"off", ...}
+  #   bool - true/false
+  def self.extract_matching_ids_from(cb_hash, bool)
+    true_ids = []
+    cb_hash.each do |id, on_off|
+      true_ids << id if Utils.cb_to_tf(on_off) == bool
+    end
+    return true_ids
+  end
+
 end
