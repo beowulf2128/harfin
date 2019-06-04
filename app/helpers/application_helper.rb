@@ -54,4 +54,17 @@ module ApplicationHelper
   def tbl_css
     "table table-striped table-hover table-sm table-responsive-sm"
   end
+
+  def bg_scr_only
+    "d-none d-md-block"
+  end
+  def sm_scr_only
+    "d-md-none"
+  end
+
+  # Given "2019/03/01", return "03/01". For small screens
+  def sm_date(date_str)
+    date_str[5..-1]
+  end
+
 end

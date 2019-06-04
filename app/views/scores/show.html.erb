@@ -40,14 +40,16 @@
 </div>
 <table class="<%= tbl_css %>">
   <tr>
-    <th>Date</th>
-    <th>Bk/Bible/Att</th> <%# Recorded by belongs to each score, not the line  %>
+    <th class="<%= sm_scr_only %>">Date</th>
+    <th class="<%= bg_scr_only %>">Date</th>
+    <th>Bk/Bi/Att</th> <%# Recorded by belongs to each score, not the line  %>
     <th>Truthbook</th>
     <th>Other</th>
-    <th>Points</th>
+    <th class="<%= bg_scr_only %>">Points</th>
   </tr>
   <tr>
-    <td>date</td>
+    <td class="<%= sm_scr_only %>"></td>
+    <td class="<%= bg_scr_only %>"></td>
     <td>
       <%= render partial: 'scores/quick_add', locals: {
         avail_scores: @next_avail_bba_scores,
@@ -66,15 +68,16 @@
         sessionday_id: nil,
         heading: 'Other'} %>
     </td>
-    <td></td>
+    <td class="<%= bg_scr_only %>"></td>
   </tr>
   <% @scoresheet.lines.reverse_each do |line_date, line_data|  %>
     <tr class="">
-      <td><%= line_date %> </td>
+      <td class="<%= sm_scr_only %>"><%= sm_date(line_date) %></td>
+      <td class="<%= bg_scr_only %>"><%= line_date %></td>
       <td><%= book_bible_att(line_data) %> </td>
       <td><%= tb_signas(line_data)%> </td>
       <td><%= other_scores(line_data)%> </td>
-      <td><%= accum_line_pts(line_data) %></td>
+      <td class="<%= bg_scr_only %>"><%= accum_line_pts(line_data) %></td>
     </tr>
   <% end %>
 </table>
