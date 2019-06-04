@@ -38,7 +38,7 @@ class Registration < ApplicationRecord
   end
 
   def points
-    @points ||= self.person.scores_in(self.sessionyear).sum(:point_value)
+    @points ||= Vwscore.scores_for(self.person, self.sessionyear).sum(:point_value)
   end
 
   def self.for_person_in(person, sessionyear)

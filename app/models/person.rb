@@ -46,9 +46,6 @@ class Person < ApplicationRecord
 
   # TODO include skipped sections first!!!
   def next_truthbook_sections(how_many=5)
-    #next_id = next_truthbook_section_sort_id
-    #Truthbooksection.where(sort: next_id..(next_id+how_many-1)).sorted
-
     tbk_start_sort = Truthbooksection.start_sort_for_book(self.current_truthbook)
     Truthbooksection.
       joins("LEFT JOIN truthbooksignatures signas ON (signas.truthbooksection_id = truthbooksections.id and signas.clubber_id = #{self.id} )").
@@ -58,12 +55,6 @@ class Person < ApplicationRecord
 
   def attendances_in(sessionyear)
     attendances.joins(:sessionday).where(:sessiondays=>{:sessionyear_id=>sessionyear.id})
-  end
-
-  def scores_in(sessionyear)
-    # join back to parent tables
-    scores.joins(:attendance=>:sessionday).where(:sessiondays=>{:sessionyear_id=>sessionyear.id} )
-
   end
 
   def current_points
