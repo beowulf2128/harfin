@@ -61,7 +61,7 @@ class Person < ApplicationRecord
     return @current_points if @current_points.present?
     sy = Sessionyear.current
     return @current_points = 0 if sy.nil?
-    @current_points = scores_in(Sessionyear.current).sum(:point_value)
+    @current_points = Vwscore.scores_for(self, Sessionyear.current).sum(:point_value)
   end
 
 end

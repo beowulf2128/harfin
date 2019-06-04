@@ -17,8 +17,7 @@ class Registration < ApplicationRecord
     return @progress_stats if @progress_stats.present?
     sy = self.sessionyear
     clubber = self.person
-    signas_count = clubber.scores_in(sy).joins(:scoretype).
-                                 where(scoretypes:{name:Scoretype::SIGNA_TYPES}).count
+    signas_count = Vwscore.scores_for(clubber, sy).where(score_type_name: Scoretype::SIGNA_TYPES).count
     atts_count = clubber.attendances_in(sy).count
 		signas_per_att = signas_count.to_f / atts_count.to_f
 		signas_per_att = 0 if signas_per_att.nan?
