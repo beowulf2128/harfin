@@ -18,9 +18,9 @@ Scoretype.create!(name: 'Attendance',       suggested_point_value: 5,active: tru
 Scoretype.create!(name: 'Book',             suggested_point_value: 5,active: true)
 Scoretype.create!(name: 'Bible',            suggested_point_value: 5,active: true)
 Scoretype.create!(name: 'Standard',         suggested_point_value: 5,active: false)
-Scoretype.create!(name: 'Section',          suggested_point_value: 15,active: true)
-Scoretype.create!(name: 'Training',         suggested_point_value: 30,active: true)
-Scoretype.create!(name: 'Final',            suggested_point_value: 30,active: true)
+st_sec = Scoretype.create!(name: 'Section',          suggested_point_value: 15,active: true)
+st_trn = Scoretype.create!(name: 'Training',         suggested_point_value: 30,active: true)
+st_fnl = Scoretype.create!(name: 'Final',            suggested_point_value: 30,active: true)
 Scoretype.create!(name: 'Friend',           suggested_point_value: 30,active: true)
 Scoretype.create!(name: 'ThemeParticipation', suggested_point_value: 30,active: true)
 Scoretype.create!(name: 'Team',             suggested_point_value: 15,active: true)
@@ -48,18 +48,22 @@ Truthbook.where(edition: 'rbp1').order(:name).each do |tb|
   end
   units.each do |unit|
     %w{1 2 3 4 5 6 7 8 9 10 Training Final}.each do |section|
+      st = st_sec
+      st = st_trn if section == 'Training'
+      st = st_fnl if section == 'Final'
       Truthbooksection.create!({
         truthbook_id: tb.id,
         unit: unit,
         section: section,
-        sort: counter
+        sort: counter,
+        scoretype: st
       })
       counter += 1
     end # sections
   end # units
 end
-require './20190601024658_add_is_scoretype_id_to_truthbooksection'
-AddIsScoretypeIdToTruthbooksection.fill_scoretype_ids
+# require './20190601024658_add_is_scoretype_id_to_truthbooksection'
+# AddIsScoretypeIdToTruthbooksection.fill_scoretype_ids
 
 puts "  - session years"
 sy15 = Sessionyear.create!(start_date: Date.parse('August 01, 2015'), end_date: Date.parse('June 01, 2016'), theme: "15-16 theme" )
@@ -100,14 +104,8 @@ puts "  - fake 2A scores rand) for Lay, 1st 10 club nights in 2018"
 a2 = Truthbook.find_by_name '2A'
 tb_secs = a2.truthbooksections.sorted.limit(50).to_a
 sy18.sessiondays.sorted.club_nights.limit(10).each do |sd|
-  # Attendances
-  att = Attendance.create!({
-    attender: lay,
-    sessionday: sd,
-    recorded_by: dan
-  })
-  Score.create_book_bible_score_for(lay, dan, att)
 
+  Score.create_book_bible_att_score_for(lay, dan, sd)
 
   # TB Signas
   signas_cnt = rand(4) # 0 to 4 signas each night
@@ -117,15 +115,15 @@ sy18.sessiondays.sorted.club_nights.limit(10).each do |sd|
       clubber_id: lay.id,
       truthbooksection_id: tb_sec.id
     })
-    Score.create_truthbooksignature_score_for(lay, dan, tbsigna, att)
+    Score.create_truthbooksignature_score_for(lay, dan, tbsigna, sd)
 
   end # tb_secs
 end
 
-lay_friend_att = lay.attendances_in(sy18).third
-lay_friend_score = Score.create_friend_score_for(lay, dan, lay_friend_att) # just for fun
+lay_friend_sd = sy18.sessiondays.third
+lay_friend_score = Score.create_friend_score_for(lay, dan, lay_friend_sd) # just for fun
 
-Score.create_team_score('Blue', 30, lay.attendances_in(sy18).fourth.sessionday.sd_date ,
+Score.create_team_score('Blue', 30, sy18.sessiondays.fourth,
                           'Won review game', dan)
 =begin
 Comment.create!({

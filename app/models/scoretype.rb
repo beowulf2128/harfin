@@ -17,5 +17,8 @@ class Scoretype < ApplicationRecord
   def self.bible
     find_by_name 'Bible'
   end
+  def self.attendance
+    find_by_name 'Attendance'
+  end
 
 end

@@ -10,18 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190601024658) do
+ActiveRecord::Schema.define(version: 20190604225756) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "attendances", force: :cascade do |t|
-    t.integer "attender_id"
-    t.integer "sessionday_id"
-    t.integer "recorded_by_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "persons", id: :serial, force: :cascade do |t|
     t.string "first_name"
@@ -50,7 +42,6 @@ ActiveRecord::Schema.define(version: 20190601024658) do
   create_table "scores", force: :cascade do |t|
     t.bigint "scoretype_id"
     t.integer "point_value"
-    t.bigint "attendance_id"
     t.date "score_date"
     t.string "team_name"
     t.integer "clubber_id"
@@ -58,7 +49,8 @@ ActiveRecord::Schema.define(version: 20190601024658) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "truthbooksignature_id"
-    t.index ["attendance_id"], name: "index_scores_on_attendance_id"
+    t.integer "sessionday_id"
+    t.index ["sessionday_id"], name: "index_scores_on_sessionday_id"
     t.index ["scoretype_id"], name: "index_scores_on_scoretype_id"
   end
 
@@ -122,12 +114,8 @@ ActiveRecord::Schema.define(version: 20190601024658) do
     t.index ["person_id"], name: "index_users_on_person_id"
   end
 
-  add_foreign_key "attendances", "persons", column: "attender_id"
-  add_foreign_key "attendances", "persons", column: "recorded_by_id"
-  add_foreign_key "attendances", "sessiondays"
   add_foreign_key "registrations", "persons"
   add_foreign_key "registrations", "sessionyears"
-  add_foreign_key "scores", "attendances"
   add_foreign_key "scores", "persons", column: "clubber_id"
   add_foreign_key "scores", "persons", column: "recorded_by_id"
   add_foreign_key "scores", "scoretypes"

@@ -1,5 +1,6 @@
 class Sessionday < ApplicationRecord
   belongs_to :sessionyear
+  has_many :scores
 
   scope :sorted,      -> { order(:sd_date) }
   scope :club_nights, -> { where(is_club_night: true) }

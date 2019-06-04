@@ -1,8 +1,9 @@
 class CreateScoresView < ActiveRecord::Migration[5.1]
   def up
+    puts "Create scores view..."
     execute <<-SQL
       -- In Postgres syntax.
-      CREATE VIEW vwscores AS
+      CREATE OR REPLACE VIEW vwscores AS
         SELECT
           s.*,
           st.name                AS score_type_name,
@@ -30,8 +31,7 @@ class CreateScoresView < ActiveRecord::Migration[5.1]
           LEFT JOIN truthbooksections tbsecs    ON tbsecs.id = tbsigs.truthbooksection_id
           LEFT JOIN truthbooks tbs              ON tbs.id = tbsecs.truthbook_id
 
-          LEFT JOIN attendances atts            ON atts.id = s.attendance_id
-          LEFT JOIN sessiondays sdays           ON sdays.id = atts.sessionday_id
+          LEFT JOIN sessiondays sdays           ON sdays.id = s.sessionday_id
           --left join sessionyears syrs          on syrs.id = sdays.sessionyear_id
     SQL
   end

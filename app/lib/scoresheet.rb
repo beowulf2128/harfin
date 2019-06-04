@@ -72,7 +72,7 @@ class Scoresheet
         point_value: st.suggested_point_value,
         recorded_by: rec_by_person,
         score_date: now,
-        attendance_id: nil, # TODO
+        sessionday_id: nil, # TODO
         team_name: nil # for team (non-person) scores
       }
     end
@@ -98,7 +98,7 @@ class Scoresheet
           point_value: tbs.scoretype.suggested_point_value,
           recorded_by: rec_by_person,
           score_date: now,
-          attendance_id: nil, # TODO
+          sessionday_id: nil, # TODO
           truthbooksignature: signa,
           team_name: nil # for team (non-person) scores
 
