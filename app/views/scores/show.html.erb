@@ -42,33 +42,36 @@
   <tr>
     <th class="<%= sm_scr_only %>">Date</th>
     <th class="<%= bg_scr_only %>">Date</th>
-    <th>Bk/Bi/Att</th> <%# Recorded by belongs to each score, not the line  %>
-    <th>Truthbook</th>
-    <th>Other</th>
+    <th>
+      <div class="d-flex">
+        <div>Bk/Bi/Att</div>
+        <%= render partial: 'scores/quick_add', locals: {
+          avail_scores: @next_avail_bba_scores,
+          sessionday_id: nil,
+          heading: 'Today'} %>
+      </div>
+
+    </th> <%# Recorded by belongs to each score, not the line  %>
+    <th>
+      <div class="d-flex">
+        <div>Truthbook</div>
+        <%= render partial: 'scores/quick_add', locals: {
+          avail_scores: @next_avail_section_scores,
+          sessionday_id: nil,
+          heading: 'Next Sections'} %>
+      </div>
+
+    </th>
+    <th>
+      <div class="d-flex">
+        <div>Other</div>
+        <%= render partial: 'scores/quick_add', locals: {
+          avail_scores: @next_avail_other_scores,
+          sessionday_id: nil,
+          heading: 'Other'} %>
+      </div>
+    </th>
     <th class="<%= bg_scr_only %>">Points</th>
-  </tr>
-  <tr>
-    <td class="<%= sm_scr_only %>"></td>
-    <td class="<%= bg_scr_only %>"></td>
-    <td>
-      <%= render partial: 'scores/quick_add', locals: {
-        avail_scores: @next_avail_bba_scores,
-        sessionday_id: nil,
-        heading: 'Today'} %>
-    </td>
-    <td>
-      <%= render partial: 'scores/quick_add', locals: {
-        avail_scores: @next_avail_section_scores,
-        sessionday_id: nil,
-        heading: 'Next Sections'} %>
-    </td>
-    <td>
-      <%= render partial: 'scores/quick_add', locals: {
-        avail_scores: @next_avail_other_scores,
-        sessionday_id: nil,
-        heading: 'Other'} %>
-    </td>
-    <td class="<%= bg_scr_only %>"></td>
   </tr>
   <% @scoresheet.lines.reverse_each do |line_date, line_data|  %>
     <tr class="<%= line_data[:is_club_night] ? '' : 'faded' %>">
