@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   resources :scores
   post 'scores/quick_add', to: 'scores#quick_add'
+  get  'scoresheet/:id', to: 'scores#scoresheet'
 
   resources :persons
   resources :users

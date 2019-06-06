@@ -2,7 +2,7 @@ class ScoresController < ApplicationController
 
   before_action :authorize
 
-  def show
+  def scoresheet
     @registration = Registration.find params[:id]
     @person = @registration.person
     @sy = @registration.sessionyear
@@ -12,6 +12,7 @@ class ScoresController < ApplicationController
     @next_avail_bba_scores = Scoresheet.avail_bk_bib_att_scores
     @next_avail_section_scores = Scoresheet.avail_section_scores(@person)
     @next_avail_other_scores = Scoresheet.avail_other_scores
+    render :scoresheet
   end
 
   def quick_add
@@ -22,7 +23,7 @@ class ScoresController < ApplicationController
     else
       raise "Error, unknown quick_add: #{params.inspect}"
     end
-    redirect_to "/scores/#{params[:registration_id]}"
+    redirect_to "/scoresheet/#{params[:registration_id]}"
   end
 
   private
