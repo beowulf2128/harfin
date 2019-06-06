@@ -30,7 +30,8 @@ class ScoresController < ApplicationController
   def quick_add_nonsection_scores
     p = params
     reg = Registration.find p[:registration_id]
-    rez_mgr = Scoresheet.add_nonsection_scores(reg.person, p[:scoretypes], p[:sessionday_id], @current_user.person)
+    sd = reg.sessionyear.club_night_on(Date.today) # in case today is a sd
+    rez_mgr = Scoresheet.add_nonsection_scores(reg.person, p[:scoretypes], sd, @current_user.person)
     if !rez_mgr.errors?
       flash[:success] = "Scores added!"
     else
@@ -41,7 +42,9 @@ class ScoresController < ApplicationController
   def quick_add_section_scores
     p = params
     reg = Registration.find p[:registration_id]
-    rez_mgr = Scoresheet.add_section_scores(reg.person, p[:truthbooksections], p[:sessionday_id], @current_user.person)
+    sd = reg.sessionyear.club_night_on(Date.today) # in case today is a sd
+
+    rez_mgr = Scoresheet.add_section_scores(reg.person, p[:truthbooksections], sd, @current_user.person)
     if !rez_mgr.errors?
       flash[:success] = "Scores added!"
     else

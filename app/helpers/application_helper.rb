@@ -14,7 +14,7 @@ module ApplicationHelper
   # Add up Book/Bible/section/all scores
   def accum_line_pts(line_data)
     pts = 0
-    line_data.each do |score_type, scores| # key, val
+    line_data[:scores].each do |score_type, scores| # key, val
       pts += scores.sum {|score| score.point_value }
     end
     pts
@@ -34,7 +34,7 @@ module ApplicationHelper
 
   # score_types - Book, Section, Friend, etc
   def labelize_scores(line_data, score_types)
-    ld = line_data
+    ld = line_data[:scores]
     s = []
     score_types.each do |st|
       if ld[st].present?

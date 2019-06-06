@@ -32,4 +32,10 @@ class Sessionyear < ApplicationRecord
     return sessiondays.count > 0
   end
 
+  # Given a date, returnt the sessionday club night if exists
+  def club_night_on(date)
+    sessiondays.where(sd_date: date).club_nights.first
+  end
+
+
 end

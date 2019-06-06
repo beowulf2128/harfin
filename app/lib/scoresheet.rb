@@ -9,16 +9,17 @@ class Scoresheet
   # A scoresheet line is usually every score that happens during a club night.
   # For non-club night scores, each date stamp is a line
   def lines
-    @lines ||= Scoresheet.group_by_date_then_scoretype(@vwscores)
+    @lines ||= Scoresheet.group_by_date_then_scoretype(@vwscores).sort.to_h # sort hash by keys
   end
 
   def self.group_by_date_then_scoretype(vwscores) # assumes scores are sorted by date
     by_date = {}
     vwscores.each do |score|
       key = Utils.date_fmt(score.display_date)
-      by_date[key]                         = {} if by_date[key].nil?
-      by_date[key][score.score_type_name]  = [] if by_date[key][score.score_type_name].nil?
-      by_date[key][score.score_type_name]  << score
+      by_date[key]                                  = {scores: {}} if by_date[key].nil?
+      by_date[key][:scores][score.score_type_name]  = [] if by_date[key][:scores][score.score_type_name].nil?
+      by_date[key][:scores][score.score_type_name]  << score
+      by_date[key][:is_club_night]                  = score.sessionday_date.present?
     end
     by_date
   end
@@ -59,7 +60,7 @@ class Scoresheet
     end
   end
 
-  def self.add_nonsection_scores(for_person, scoretype_id_hashes, sessionday_id, rec_by_person)
+  def self.add_nonsection_scores(for_person, scoretype_id_hashes, sessionday, rec_by_person)
     st_ids_to_add = Utils.extract_matching_ids_from(scoretype_id_hashes, true)
     # sts_to_del = scoretype_id_hashes.collect {|id, on_off| id if Utils.cb_to_tf(on_off) == false}
     scores = []
@@ -72,7 +73,7 @@ class Scoresheet
         point_value: st.suggested_point_value,
         recorded_by: rec_by_person,
         score_date: now,
-        sessionday_id: nil, # TODO
+        sessionday: sessionday,
         team_name: nil # for team (non-person) scores
       }
     end
@@ -80,7 +81,7 @@ class Scoresheet
     return ResultMgr.new
   end
 
-  def self.add_section_scores(for_person, section_id_hashes, sessionday_id, rec_by_person)
+  def self.add_section_scores(for_person, section_id_hashes, sessionday, rec_by_person)
     sec_ids_to_add = Utils.extract_matching_ids_from(section_id_hashes, true)
     scores = []
     now = Time.now
@@ -88,7 +89,7 @@ class Scoresheet
       sec_ids_to_add.each do |id|
         tbs = Truthbooksection.where(id:id).includes(:scoretype).first # TODO minor N+1
         signa = Truthbooksignature.create!({
-          sessionday_id: nil, # TODO
+          sessionday: sessionday,
           clubber: for_person,
           truthbooksection: tbs
         })
@@ -98,7 +99,7 @@ class Scoresheet
           point_value: tbs.scoretype.suggested_point_value,
           recorded_by: rec_by_person,
           score_date: now,
-          sessionday_id: nil, # TODO
+          sessionday: sessionday,
           truthbooksignature: signa,
           team_name: nil # for team (non-person) scores
 

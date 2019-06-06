@@ -15,8 +15,9 @@
       <th></th>
       <th></th>
     </tr>
+    <% now = Time.now %>
     <% @sessionyears.each do |sessionyear| %>
-      <tr>
+      <tr class="<%= (now.between?(sessionyear.start_date, sessionyear.end_date)) ? 'alert alert-info' : '' %>">
         <td>
           <%= link_to sessionyear.year, sessionyear %>
         </td>
