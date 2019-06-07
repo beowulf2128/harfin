@@ -1,0 +1,49 @@
+<%= render partial: 'shared/flash_error',locals:{model: @score} %>
+
+<%
+  persons = Person.for_clubber_select
+  scoretypes = Scoretype.active
+  sessiondays = Sessionday.includes(:sessionyear).desc
+  today = Date.today
+  @score.sessionday = sessiondays.reverse.find {|sd| sd.sd_date > today } if @score.sessionday.blank?
+%>
+<%= form_for(@score) do |f| %>
+
+  <div class='form-group'>
+    <%= f.hidden_field :registration_id, value: params[:registration_id] %>
+    <%= f.label :clubber %>
+    <%= f.select :clubber_id, persons.collect{|p| [p.name_lf, p.id]}, {selected: @score.clubber_id, include_blank:true}, class:"form-control" %>
+  </div>
+
+  <div class='form-group'>
+    <%= f.label :club_night %>
+    <%
+      sess_day_opts = sessiondays.collect{|d| [d.out_sy, d.id]}
+      opts = {selected: @score.sessionday_id, include_blank:true}
+    %>
+    <%= f.select :sessionday_id, sess_day_opts, opts, class:"form-control" %>
+  </div>
+
+  <div class='form-group'>
+    <%= f.label :scoretype %>
+    <%= f.select :scoretype_id, scoretypes.collect{|x| [x.name_points, x.id]}, {selected: @score.scoretype_id}, class:"form-control" %>
+  </div>
+
+  <div class='form-group'>
+    <%= f.label :points %>
+    <%= f.text_field :point_value, {class: 'form-control'} %>
+  </div>
+
+  <div class='form-group'>
+    <%= f.label :truthbooksignature %>
+    <%= f.select :truthbooksignature, [], {selected: nil}, class:"form-control" %>
+  </div>
+
+  <%= link_to 'Cancel', "/scoresheet/#{params[:registration_id]}", class:"btn btn-secondary", role:"button" %>
+  <%= f.submit class:'btn btn-primary' %>
+<% end %>
+
+<pre>
+  <%= @score.inspect %>
+</pre>
+

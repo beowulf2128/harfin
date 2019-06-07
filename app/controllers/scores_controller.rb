@@ -15,6 +15,30 @@ class ScoresController < ApplicationController
     render :scoresheet
   end
 
+  def new
+    @registration = Registration.find(params[:registration_id])
+
+    @score = Score.new do |s|
+      s.clubber_id = params[:clubber_id]
+      s.scoretype = Scoretype.section
+      s.point_value = Scoretype.section.suggested_point_value
+    end
+  end
+
+  def create
+    @score = Score.new(score_params)
+    @score.recorded_by = @current_user.person
+    respond_to do |format|
+      if @score.save
+        format.html { redirect_to "/scoresheet/#{params[:score][:registration_id]}", notice: 'Score saved!' }
+#         format.json { render :show, status: :created, location: @registration }
+      else
+        format.html { render :new }
+#         format.json { render json: @registration.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   def quick_add
     if params.has_key?("scoretypes")
       quick_add_nonsection_scores
@@ -52,5 +76,12 @@ class ScoresController < ApplicationController
       flash[:error] = "Failed! ...#{rez_mgr.errors.inspect}"
     end
   end
+
+  private
+
+    def score_params
+      params.fetch(:score, {}).permit(:clubber_id, :sessionday_id, :scoretype_id,
+                                        :point_value, :truthbooksignature_id)
+    end
 
 end

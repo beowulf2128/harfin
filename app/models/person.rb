@@ -59,4 +59,7 @@ class Person < ApplicationRecord
     @current_points = Vwscore.scores_for(self, Sessionyear.current).sum(:point_value)
   end
 
+  def self.for_clubber_select
+    Person.joins(:registrations).where("reg_type='Clubber'").order('registrations.id DESC, Persons.last_name')
+  end
 end

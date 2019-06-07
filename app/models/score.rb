@@ -5,6 +5,9 @@ class Score < ApplicationRecord
   belongs_to :recorded_by, :class_name=>:Person, :foreign_key=>:recorded_by_id
   belongs_to :truthbooksignature, optional: true
 
+  validates_associated :clubber
+  validates :point_value, numericality: {only_integer: true}
+
   # For seed data
   def self.create_book_bible_att_score_for(clubber_person, recorded_by_person, sessionday, score_date=nil)
     transaction do

@@ -5,10 +5,10 @@
     heading - heading of the dropdown
 %>
 <div class="dropdown ml-2">
-  <button class="btn btn-primary dropdown-toggle btn-sm" type="button" data-toggle="dropdown" data-display="static">
+  <button class="btn btn-success dropdown-toggle btn-sm" type="button" data-toggle="dropdown" data-display="static">
     +
   </button>
-  <div class="dropdown-menu">
+  <div class="dropdown-menu p-2">
     <h5><%= heading %></h5>
     <%= form_tag("/scores/quick_add", method:"post") do %>
       <%= hidden_field_tag("sessionday_id", sessionday_id) %>

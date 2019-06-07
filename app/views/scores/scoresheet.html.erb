@@ -29,7 +29,9 @@
 
 
 <div class="d-flex align-items-center">
-  <h2 class="flex-grow-1">Scores</h2>
+  <h2 class="flex-grow-1">Scores
+    <a href="/scores/new?registration_id=<%=@registration.id%>&clubber_id=<%= @person.id%>"  role="button" class="btn btn-primary btn-sm">Add+</a>
+  </h2>
   <div>
     <%= render partial: 'scores/award_progress_bar', locals: {stats: stats, color: 'Silver'} %>
   </div>
@@ -47,6 +49,7 @@
         <div>Bk/Bi/Att</div>
         <%= render partial: 'scores/quick_add', locals: {
           avail_scores: @next_avail_bba_scores,
+          registration_id: @registration.id,
           sessionday_id: nil,
           heading: 'Today'} %>
       </div>
@@ -57,6 +60,7 @@
         <div>Truthbook</div>
         <%= render partial: 'scores/quick_add', locals: {
           avail_scores: @next_avail_section_scores,
+          registration_id: @registration.id,
           sessionday_id: nil,
           heading: 'Next Sections'} %>
       </div>
@@ -67,6 +71,7 @@
         <div>Other</div>
         <%= render partial: 'scores/quick_add', locals: {
           avail_scores: @next_avail_other_scores,
+          registration_id: @registration.id,
           sessionday_id: nil,
           heading: 'Other'} %>
       </div>
@@ -74,9 +79,9 @@
     <th class="<%= bg_scr_only %>">Points</th>
   </tr>
   <% @scoresheet.lines.reverse_each do |line_date, line_data|  %>
-    <tr class="<%= line_data[:is_club_night] ? '' : 'faded' %>">
-      <td class="<%= sm_scr_only %>"><%= sm_date(line_date) %></td>
-      <td class="<%= bg_scr_only %>"><%= line_date %></td>
+    <tr class="">
+      <td class="<%= sm_scr_only %> <%= line_data[:is_club_night] ? '' : 'faded' %>"><%= sm_date(line_date) %></td>
+      <td class="<%= bg_scr_only %> <%= line_data[:is_club_night] ? '' : 'faded' %>"><%= line_date %></td>
       <td><%= book_bible_att(line_data) %></td>
       <td><%= tb_signas(line_data)%> </td>
       <td><%= other_scores(line_data)%> </td>
