@@ -1,0 +1,22 @@
+# Roles has many Privileges
+privileges:
+  - name: login
+    description: "Access to this app"
+  - name: view_scores
+    description: "View scores of clubbers"
+  - name: edit_scores
+    description: "Record scoresheet scores"
+  - name: edit_calendar
+    description: "Make changes to calendar dates/events"
+  - name: edit_persons
+    description: "Make edits to person info, names etc"
+roles:
+  - name: parent
+    description: "View progress of clubbers"
+    privs: login,view_scores
+  - name: leader
+    description: "Record club night events & points"
+    privs: login,view_scores,edit_scores
+  - name: admin
+    description: "Omnipotent"
+    privs: login,view_scores,edit_scores,edit_persons,edit_calendar

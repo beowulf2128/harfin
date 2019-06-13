@@ -83,16 +83,40 @@ sy19.sessiondays.each {|sd| sd.save! }
 
 
 puts "  - fake persons"
+# admins
 dan = Person.create!(first_name: 'Dan', middle_name: 'E', last_name: 'And', birthdate: Date.parse('August 01, 1984'), gender: 'm')
 meg = Person.create!(first_name: 'Meg', middle_name: 'A', last_name: 'And', birthdate: Date.parse('February 01, 1985'), gender: 'f')
+# clubbers
 lay = Person.create!(first_name: 'Lay Lay', middle_name: 'J', last_name: 'And', birthdate: Date.parse('August 01, 2012'), gender: 'f')
 rey = Person.create!(first_name: 'Rey Rey', middle_name: 'J', last_name: 'And', birthdate: Date.parse('April 01, 2016'), gender: 'f')
-joe = Person.create!(first_name: 'Joseph', middle_name: '', last_name: 'Underwood', birthdate: Date.parse('April 02, 2008'), gender: 'm')
+joe = Person.create!(first_name: 'Joseph', middle_name: '', last_name: 'Und', birthdate: Date.parse('April 02, 2008'), gender: 'm')
 
+lucy = Person.create!(first_name: 'Lucy', middle_name: '', last_name: 'Und', birthdate: Date.parse('April 09, 2008'), gender: 'f')
+molly = Person.create!(first_name: 'Molly', middle_name: '', last_name: 'Da', birthdate: Date.parse('April 06, 2008'), gender: 'f')
+bruce = Person.create!(first_name: 'Bruce', middle_name: '', last_name: 'Wo', birthdate: Date.parse('April 16, 2013'), gender: 'm')
+
+# leaders
+am = Person.create!(first_name: 'Am', middle_name: '', last_name: 'Und', birthdate: Date.parse('April 09, 1980'), gender: 'f')
+
+# parents
+kev = Person.create!(first_name: 'Kev', middle_name: '', last_name: 'Und', birthdate: Date.parse('April 02, 1980'), gender: 'm')
+
+# no access
+abi = Person.create!(first_name: 'Abi', middle_name: '', last_name: 'Vo', birthdate: Date.parse('April 03, 2006'), gender: 'f')
+
+
+Am
 puts "  - fake users"
 danu = User.create!(email: 'dan@dan.com', password: 'dan', person_id: dan.id)
 megu = User.create!(email: 'meg@meg.com', password: 'meg', person_id: meg.id)
+amu = User.create!(email: 'am@mam.com', password: 'am', person_id: am.id)
+kevu = User.create!(email: 'kev@kev.com', password: 'kev', person_id: kev.id)
+abiu = User.create!(email: 'abi@abi.com', password: 'abi', person_id: abi.id)
 
+SeedHelper.add_role_to_users('admin', [danu, megu])
+SeedHelper.add_role_to_users('leader', [amu])
+SeedHelper.add_role_to_users('parent', [kevu])
+# no roles for abi !!!!
 
 
 puts "  - fake registrations for 2018-19"
@@ -130,3 +154,18 @@ Comment.create!({
   comment
 })
 =end
+
+puts "  - Privileges "
+rps = YAML::load_file Rails.root.join('db','data','roles_privs.yml')
+SeedHelper.create_from_attrs_ary_once!(rps["privileges"])
+
+puts "  - Roles "
+Role.transaction do
+  rps["roles"].each do |attrs|
+    role_attrs = attrs.except("privs")
+    role = SeedHelper.create_from_attrs_once!(Role, role_attrs)
+    attrs["privs"].split(',').each do |priv|
+      role.privileges << Privilege.find_by_name(priv)
+    end
+  end
+end

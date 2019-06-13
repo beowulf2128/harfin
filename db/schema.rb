@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190604225756) do
+ActiveRecord::Schema.define(version: 20190607192446) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,18 @@ ActiveRecord::Schema.define(version: 20190604225756) do
     t.boolean "gender"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "privileges", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "privileges_roles", id: false, force: :cascade do |t|
+    t.bigint "role_id", null: false
+    t.bigint "privilege_id", null: false
   end
 
   create_table "registrations", id: :serial, force: :cascade do |t|
@@ -39,6 +51,18 @@ ActiveRecord::Schema.define(version: 20190604225756) do
     t.index ["sessionyear_id"], name: "index_registrations_on_sessionyear_id"
   end
 
+  create_table "roles", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "roles_users", id: false, force: :cascade do |t|
+    t.bigint "role_id", null: false
+    t.bigint "user_id", null: false
+  end
+
   create_table "scores", force: :cascade do |t|
     t.bigint "scoretype_id"
     t.integer "point_value"
@@ -50,8 +74,8 @@ ActiveRecord::Schema.define(version: 20190604225756) do
     t.datetime "updated_at", null: false
     t.integer "truthbooksignature_id"
     t.integer "sessionday_id"
-    t.index ["sessionday_id"], name: "index_scores_on_sessionday_id"
     t.index ["scoretype_id"], name: "index_scores_on_scoretype_id"
+    t.index ["sessionday_id"], name: "index_scores_on_sessionday_id"
   end
 
   create_table "scoretypes", force: :cascade do |t|

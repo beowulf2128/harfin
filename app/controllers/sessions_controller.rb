@@ -2,11 +2,12 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by_email(params[:email])
-    if user && user.authenticate(params[:password])
+    if user && user.has_priv?(:login) && user.authenticate(params[:password])
       session[:user_id] = user.id
       redirect_to root_url, notice: "Logged in!"
     else
-      flash.now.alert = "Login Failure: Email or password is invalid... dan@dan.com /  dan"
+      msg = "Login Failure: Either email/pw is invalid, or you haven't been granted access"
+      redirect_to login_url, alert: msg
     end
   end
 
