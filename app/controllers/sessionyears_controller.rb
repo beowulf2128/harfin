@@ -1,7 +1,12 @@
 class SessionyearsController < ApplicationController
+
+  ACCESS = {
+    edit_calendar: [:calendar, :index, :show, :new, :edit, :create, :update, :destroy]
+  }
+  before_action -> { authorize(ACCESS) }
+
   before_action :set_sessionyear, only: [:show, :edit, :update, :destroy,
                                           :calendar, :generate_calendar]
-  before_action  :authorize
 
   def calendar
 

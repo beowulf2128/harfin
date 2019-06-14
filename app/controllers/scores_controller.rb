@@ -1,6 +1,12 @@
 class ScoresController < ApplicationController
 
-  before_action :authorize
+
+  ACCESS = {
+    view_scores: [:scoresheet],
+    edit_scores: [:new, :create, :quick_add, :quick_add_nonsection_scores, :quick_add_section_scores]
+  }
+  before_action -> { authorize(ACCESS) }
+
 
   def scoresheet
     @registration = Registration.find params[:id]

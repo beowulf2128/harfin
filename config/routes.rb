@@ -22,6 +22,6 @@ Rails.application.routes.draw do
   get  'calendar/:id', to: 'sessionyears#calendar'
   post 'calendar/:id', to: 'sessionyears#calendar'
 
-  root :to => 'persons#index'
+  root :to => 'registrations#index'
 end
 

@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
 
+  # before_action -> { authorize } # <= Don't, else can't login/out
+
   def create
     user = User.find_by_email(params[:email])
     if user && user.has_priv?(:login) && user.authenticate(params[:password])

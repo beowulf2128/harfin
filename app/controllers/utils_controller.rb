@@ -1,5 +1,10 @@
 class UtilsController < ApplicationController
 
+  ACCESS = {
+    edit_persons: [:erd]
+  }
+  before_action -> { authorize(ACCESS) } # TODO need admin priv
+
   def erd
     raise 'Unauthorized action' unless Rails.env == 'development'
     system "rake erd filename=tmp/erd" #unless File.exists? 'erd.pdf'

@@ -1,6 +1,8 @@
 class PersonsController < ApplicationController
-
-  before_action :authorize
+  ACCESS = {
+    edit_persons: [:index, :show, :new, :edit, :create, :update, :destroy]
+  }
+  before_action -> { authorize(ACCESS) }
 
   before_action :set_person, only: [:show, :edit, :update, :destroy]
 

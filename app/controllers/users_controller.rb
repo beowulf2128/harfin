@@ -1,4 +1,10 @@
 class UsersController < ApplicationController
+
+  ACCESS = {
+    edit_persons: [:new, :create]
+  }
+  before_action -> { authorize(ACCESS) } # TODO need admin priv
+
   def new
     @user = User.new
   end
@@ -12,6 +18,8 @@ class UsersController < ApplicationController
       render "new"
     end
   end
+
+  private
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params

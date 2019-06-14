@@ -1,5 +1,11 @@
 class RegistrationsController < ApplicationController
-  before_action :authorize
+
+  ACCESS = {
+    view_scores: [:index, :show],
+    edit_persons: [:new, :edit, :create, :update, :destroy]
+  }
+  before_action -> { authorize(ACCESS) }
+
   before_action :set_registration, only: [:show, :edit, :update, :destroy]
 
   # GET /registrations
