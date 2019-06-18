@@ -1,0 +1,70 @@
+@import './bootstrap4_custom_imports';
+
+/* Flash alerts */
+.flash {
+  padding: 10px;
+  margin: 10px;
+}
+.notice {
+  border-left: 3px dashed blue;
+  color: blue;
+  background-color: lightcyan;
+}
+
+/* For club night rows */
+.stronger {
+  font-weight: bold;
+  color: #333;
+}
+.weaker {
+  color: #999;
+}
+.faded {
+  opacity: 0.7;
+}
+
+.blue-team {
+  color: blue;
+  border: 2px dotted blue;
+}
+.red-team {
+  color: red;
+  border: 2px dotted red;
+
+}
+
+/* Scoresheet score bubbles **********/
+.label-Book { background-color: #C66} /* browns */
+.label-Bible { background-color: #933}
+.label-Attendance { background-color: #C63}
+.label-Section { background-color: #85BEF5}  /* light blue */
+.label-Training { background-color: #2c7cf3} /* medium blue */
+.label-Final { background-color: #45ADA8}    /* turqoise */
+.label-Friend { background-color: #C09} /* fuschia */
+.label-ThemeParticipation { background-color: #36F} /* blue */
+.label-Team { background-color: #360} /* greenish */
+.margLR3 {
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+/* Progress bar for awards pace ***********/
+.award-prog-bar {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.gradient-bg-Gold {
+  background-image: linear-gradient(#FFD700, #d7af00); /* gold, dark gold */
+}
+.gradient-bg-Silver {
+  background-image: linear-gradient(#c0c0c0, #a9a9a9); /* silver, dark silver */
+}
+
+.award-prog-bar-text {
+  overflow: visible;
+  white-space: nowrap;
+  color: #333;
+  margin: 0 5px;
+
+}

@@ -24,8 +24,24 @@ class Scoresheet
     by_date
   end
 
-  def self.avail_bk_bib_att_scores #TODO for a date or club night
-    Scoretype.where(name: Scoretype::BBA_TYPES).collect do |st|
+  # Get all scores earned on a club night date for a given clubber registration
+  def self.club_night_scores_on(date, registration)
+    Score.joins(:scoretype, :sessionday=>{sessionyear: :registrations}).
+      where(["registrations.id = ? AND sd_date = ?", registration.id,date])
+  end
+
+  # Is given date a club night of the given sessionyear?
+  def self.club_night_date?(date, sessionyear)
+    sessionyear.sessiondays.where(sd_date: date).exists?
+  end
+
+  # Which book/Bible/attendance scores haven't been earned yet?
+  def self.avail_bk_bib_att_scores(registration, for_date) #TODO for a date or club night
+    # today ssession day?
+    return [] if !club_night_date?(for_date, registration.sessionyear)
+
+    existing_sts = club_night_scores_on(for_date, registration).pluck("scoretypes.name")
+    Scoretype.where(name: Scoretype::BBA_TYPES - existing_sts).collect do |st|
       Scoresheet.to_avail(st)
     end
   end
