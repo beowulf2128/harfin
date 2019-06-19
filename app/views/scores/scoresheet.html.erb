@@ -1,4 +1,7 @@
-<% stats = @registration.progress_stats %>
+<%
+  stats = @registration.progress_stats
+  today = Date.today
+%>
 
 <h1> <%= @sy.year  %> Scorecard: <%= @person.name_fl %></h1>
 <ul class="list-group list-group-horizontal">
@@ -79,9 +82,13 @@
     <th class="<%= bg_scr_only %>">Points</th>
   </tr>
   <% @scoresheet.lines.reverse_each do |line_date, line_data|  %>
-    <tr class="">
-      <td class="<%= sm_scr_only %> <%= line_data[:is_club_night] ? '' : 'faded' %>"><%= sm_date(line_date) %></td>
-      <td class="<%= bg_scr_only %> <%= line_data[:is_club_night] ? '' : 'faded' %>"><%= line_date %></td>
+    <tr class="<%= is_date_curr_club_night?(line_date, today) ? 'current-club-night' : '' %>">
+      <td class="<%= sm_scr_only %> <%= line_data[:is_club_night] ? '' : 'faded font-italic' %>">
+        <%= sm_date(line_date) %>
+      </td>
+      <td class="<%= bg_scr_only %> <%= line_data[:is_club_night] ? '' : 'faded font-italic' %>">
+        <%= line_date %>
+      </td>
       <td><%= book_bible_att(line_data) %></td>
       <td><%= tb_signas(line_data)%> </td>
       <td><%= other_scores(line_data)%> </td>

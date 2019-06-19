@@ -22,6 +22,9 @@
 .faded {
   opacity: 0.7;
 }
+.asterisked:after {
+  content: "*";
+}
 
 .blue-team {
   color: blue;
@@ -66,5 +69,11 @@
   white-space: nowrap;
   color: #333;
   margin: 0 5px;
+}
 
+/* Scoresheet row for the current date that is a club night */
+.current-club-night {
+  border-top: 2px solid sandybrown;
+  border-bottom: 2px solid sandybrown;
+  background-color: cornsilk;
 }

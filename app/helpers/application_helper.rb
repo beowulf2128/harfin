@@ -1,5 +1,9 @@
 module ApplicationHelper
 
+  def is_date_curr_club_night?(date_str, today)
+    Date.parse(date_str) == today
+  end
+
   def gold_pace(stats)
     "#{num_to_pc stats[:pc_to_gold]} to gold (#{stats[:signas_to_gold]} to go!)"
   end
