@@ -19,7 +19,7 @@ class Sessionyear < ApplicationRecord
   def self.vals_for_select
     vals = []
     sorted.limit(5).each do |sy|
-      vals << [sy.year, sy.id]
+      vals << [sy.year_with_theme, sy.id]
     end
     return vals
   end
@@ -28,11 +28,15 @@ class Sessionyear < ApplicationRecord
     "#{start_date.to_formatted_s(:year)}-#{end_date.to_formatted_s(:year)}"
   end
 
+  def year_with_theme
+    "#{year} #{theme}"
+  end
+
   def has_cal?
     return sessiondays.count > 0
   end
 
-  # Given a date, returnt the sessionday club night if exists
+  # Given a date, return the sessionday club night if exists
   def club_night_on(date)
     sessiondays.where(sd_date: date).club_nights.first
   end
