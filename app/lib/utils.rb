@@ -1,5 +1,9 @@
 module Utils
 
+  def self.or_ary(val)
+    val || []
+  end
+
   def self.date_fmt(date)
     return '' if date.blank?
     d = date.strftime('%Y/%m/%d %l:%M%P')

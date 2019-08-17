@@ -1,5 +1,9 @@
 module ApplicationHelper
 
+  def or_ary(val)
+    Utils.or_ary(val)
+  end
+
   def is_date_curr_club_night?(date_str, today)
     Date.parse(date_str) == today
   end
