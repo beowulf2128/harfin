@@ -5,7 +5,7 @@ class AddIsScoretypeIdToTruthbooksection < ActiveRecord::Migration[5.1]
 
   def self.fill_scoretype_ids
 
-    puts " - - filling scoretyp ids"
+    puts " - - filling scoretype ids"
 		sst = {}
 		sst['Section'] = Scoretype.find_by_name('Section')
 		sst['Training'] = Scoretype.find_by_name('Training')
