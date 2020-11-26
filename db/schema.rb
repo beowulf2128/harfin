@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 20190607192446) do
   create_table "scores", force: :cascade do |t|
     t.bigint "scoretype_id"
     t.integer "point_value"
+    t.bigint "sessionday_id"
     t.date "score_date"
     t.string "team_name"
     t.integer "clubber_id"
@@ -73,7 +74,6 @@ ActiveRecord::Schema.define(version: 20190607192446) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "truthbooksignature_id"
-    t.integer "sessionday_id"
     t.index ["scoretype_id"], name: "index_scores_on_scoretype_id"
     t.index ["sessionday_id"], name: "index_scores_on_sessionday_id"
   end
@@ -143,5 +143,6 @@ ActiveRecord::Schema.define(version: 20190607192446) do
   add_foreign_key "scores", "persons", column: "clubber_id"
   add_foreign_key "scores", "persons", column: "recorded_by_id"
   add_foreign_key "scores", "scoretypes"
+  add_foreign_key "scores", "sessiondays"
   add_foreign_key "sessiondays", "sessionyears"
 end
