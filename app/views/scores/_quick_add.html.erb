@@ -1,6 +1,7 @@
 <%#
   locals:
     avail_scores - array of OpenStructs created by Scoresheet.to_avail()
+    selected_score_names - array of score names that should be toggled ON
     sessionday_id - ID of club night. Nil interpreted as current time
     heading - heading of the dropdown
 %>
@@ -18,7 +19,10 @@
           <div class="custom-control custom-switch">
             <% name = (nas.scoretype_id.present?) ? "scoretypes[#{nas.scoretype_id}]" : "truthbooksections[#{nas.truthbooksection_id}]" %>
             <%= hidden_field_tag(name, '') %> <%# hidden field forces checkbox to submit even when OFF %>
-            <input name="<%= name %>" type="checkbox" class="custom-control-input" id="customSwitch-<%=nas.name%>">
+            <input
+              name="<%= name %>" type="checkbox" class="custom-control-input" id="customSwitch-<%=nas.name%>"
+              <%= selected_score_names.include?(nas.name) ? 'checked' : '' %>
+            />
             <label class="custom-control-label" for="customSwitch-<%=nas.name%>">
               <span class="badge label-<%=nas.type%>"><%= nas.name%>: <%= nas.points %></span>
             </label>

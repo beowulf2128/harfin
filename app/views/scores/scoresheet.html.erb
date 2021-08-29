@@ -52,6 +52,7 @@
         <div>Bk/Bi/Att</div>
         <%= render partial: 'scores/quick_add', locals: {
           avail_scores: @next_avail_bba_scores,
+          selected_score_names: [],
           registration_id: @registration.id,
           sessionday_id: nil,
           heading: 'Today'} %>
@@ -63,6 +64,7 @@
         <div>Truthbook</div>
         <%= render partial: 'scores/quick_add', locals: {
           avail_scores: @next_avail_section_scores,
+          selected_score_names: [],
           registration_id: @registration.id,
           sessionday_id: nil,
           heading: 'Next Sections'} %>
@@ -74,6 +76,7 @@
         <div>Other</div>
         <%= render partial: 'scores/quick_add', locals: {
           avail_scores: @next_avail_other_scores,
+          selected_score_names: [],
           registration_id: @registration.id,
           sessionday_id: nil,
           heading: 'Other'} %>

@@ -12,6 +12,12 @@ class Scoresheet
     @lines ||= Scoresheet.group_by_date_then_scoretype(@vwscores).sort.to_h # sort hash by keys
   end
 
+  def todays_club_night_scores
+    line = lines[Utils.date_fmt(Date.today)]
+    return {} if line.nil? || !line[:is_club_night]
+    return line[:scores]
+  end
+
   def self.group_by_date_then_scoretype(vwscores) # assumes scores are sorted by date
     by_date = {}
     vwscores.each do |score|
@@ -41,9 +47,11 @@ class Scoresheet
     return [] if !club_night_date?(for_date, registration.sessionyear)
 
     existing_sts = club_night_scores_on(for_date, registration).pluck("scoretypes.name")
-    Scoretype.where(name: Scoretype::BBA_TYPES - existing_sts).collect do |st|
+    #raise existing_sts.inspect
+    x = Scoretype.where(name: Scoretype::BBA_TYPES - existing_sts).collect do |st|
       Scoresheet.to_avail(st)
     end
+    return x
   end
 
   def self.avail_section_scores(person)
